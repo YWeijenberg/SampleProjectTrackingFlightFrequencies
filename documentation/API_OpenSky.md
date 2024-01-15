@@ -4,3 +4,5 @@ OpenSky is an free public API providing a variety of flight information data. Th
 ## Limitations
 - A time interval can be selected from the API but it can not be longer than 7 days
 - Data is updated every night
+
+## 
