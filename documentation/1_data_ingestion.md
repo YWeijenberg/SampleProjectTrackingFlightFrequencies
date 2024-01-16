@@ -8,3 +8,6 @@ According to the documentation on the functions free tier it would be free to in
 
 ## Blob Storage
 The API data will be ingested into blob storage, which will be the raw data (read: bronze layer).
+
+## Doing Bronze, Silver, and Gold layer all in DataBricks
+Instead of using Azure Functions, an easier way to ingest the data could be using databricks. For the purpose of this project and to learn databricks I will do the project in databricks notebook using scala. 
