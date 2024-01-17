@@ -1,0 +1,5 @@
+# Metals (Scala language server) files
+.metals/
+
+# Visual Studio Code files
+.vscode/

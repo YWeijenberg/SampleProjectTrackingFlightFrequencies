@@ -1,5 +1,5 @@
 # Tracking Flight Frequencies Using Flight Data From OpenSky
-A project with the aim of developing my data engineering skills. Ingesting data from an api to track some information on flight frequency at a range of airports.
+A project with the aim of developing my data engineering skills. Ingesting data from an api to track some information on flight frequency at Schiphol (EHAM), Eindhoven (EHEH), Heathrow (EGLL) and Aachen-Merzbrük (EDKA) airports.
 
 ## Overview
 
