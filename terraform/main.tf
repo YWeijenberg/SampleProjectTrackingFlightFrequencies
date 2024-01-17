@@ -5,8 +5,8 @@ resource "azurerm_resource_group" "TrackingFlightFrequencies" {
 
 module "databricks_module" {
   source = "./databricks"
-  
+
   # Pass variables to module
   rg_name = var.rg_name
-  region = var.region
+  region  = var.region
 }
