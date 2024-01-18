@@ -10,6 +10,7 @@ resource "azurerm_databricks_workspace" "databricksworkspace" {
   }
 }
 
+# Assign contributor role to azure databricks workspace
 resource "azurerm_role_assignment" "databricks_identity_role" {
   scope                = azurerm_databricks_workspace.databricksworkspace.id
   role_definition_name = "Contributor" # Or any other role as per your requirements
@@ -26,7 +27,7 @@ resource "databricks_secret_scope" "kv" {
   }
 }
 
-# # Create cluster for personal use during project
+# Create cluster for personal use during project
 resource "databricks_cluster" "personal_cluster" {
   # policy_id               = data.databricks_cluster_policy.personal.id
   depends_on              = [azurerm_databricks_workspace.databricksworkspace]
@@ -43,4 +44,16 @@ resource "databricks_cluster" "personal_cluster" {
   custom_tags = {
     "ResourceClass" = "SingleNode"
   }
+}
+
+resource "databricks_git_credential" "git_credentials" {
+  git_provider = "gitHub"
+  git_username = data.azurerm_key_vault_secret.gitUserName.value
+  personal_access_token = data.azurerm_key_vault_secret.gitPat.value
+}
+
+# Add integration with github repo in databricks workspace
+resource "databricks_repo" "repository" {
+  url = data.azurerm_key_vault_secret.urlRepository.value
+  branch = "dev"
 }

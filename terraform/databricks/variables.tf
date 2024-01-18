@@ -28,3 +28,8 @@ variable "identity_prinicpal_id" {
   description = "The prinicpal id of the user assigned identity"
   type        = string
 }
+
+variable "azurerm_keyvault_id" {
+  description = "The id of the azure keyvault"
+  type        = string
+}

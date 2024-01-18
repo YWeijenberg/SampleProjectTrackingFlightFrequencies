@@ -48,4 +48,5 @@ module "databricks_module" {
   key_vault_id          = azurerm_key_vault.keyvault.id
   vault_uri             = azurerm_key_vault.keyvault.vault_uri
   identity_prinicpal_id = azurerm_user_assigned_identity.databricks_identity.principal_id
+  azurerm_keyvault_id   = azurerm_key_vault.keyvault.id
 }
