@@ -9,3 +9,9 @@ variable "rg_name" {
   default     = "TrackingFlightFrequencies"
   description = "Name of resource group where project will be deployed."
 }
+
+variable "prefix" {
+  type        = string
+  default     = "FlightFreq"
+  description = "Default prefix for all resources excluding rg_name."
+}

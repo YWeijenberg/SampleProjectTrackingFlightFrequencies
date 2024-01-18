@@ -32,8 +32,11 @@ resource "azurerm_key_vault_access_policy" "kv_access_policy" {
 # Create a databricks module from the databricks folder
 module "databricks_module" {
   source = "./databricks"
-
+  
   # Pass variables to module
   rg_name = var.rg_name
   region  = var.region
+  key_vault_id = azurerm_key_vault.keyvault.id
+  vault_uri    = azurerm_key_vault.keyvault.vault_uri
+  identity_prinicpal_id = azurerm_user_assigned_identity.databricks_identity.principal_id
 }

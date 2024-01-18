@@ -16,5 +16,8 @@ provider "azurerm" {
 }
 
 provider "databricks" {
-  host = "https://adb-3439348632111253.13.azuredatabricks.net/"
+  azure_workspace_resource_id = azurerm_databricks_workspace.databricksworkspace.id
+
+  # ARM_USE_MSI environment variable is recommended
+  # azure_use_msi = true
 }

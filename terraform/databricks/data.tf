@@ -4,7 +4,7 @@ data "databricks_node_type" "smallest" {
 
 # Get the current latest version of databricks and spark
 data "databricks_spark_version" "latest_lts" {
-  long_term_support = true
+  long_term_support = true 
 }
 
 # data "databricks_cluster_policy" "personal" {

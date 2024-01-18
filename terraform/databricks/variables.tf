@@ -13,3 +13,18 @@ variable "user_name" {
   type        = string
   description = "Email of the user that will use the compute instance"
 }
+
+variable "key_vault_id" {
+  description = "The ID of the Azure Key Vault"
+  type        = string
+}
+
+variable "vault_uri" {
+  description = "The DNS name of the Azure Key Vault"
+  type        = string
+}
+
+variable "identity_prinicpal_id" {
+  description = "The prinicpal id of the user assigned identity"
+  type = string
+}
