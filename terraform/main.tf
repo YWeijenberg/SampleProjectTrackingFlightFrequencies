@@ -1,3 +1,4 @@
+# Create a resource group
 resource "azurerm_resource_group" "TrackingFlightFrequencies" {
   name     = var.rg_name
   location = var.region
