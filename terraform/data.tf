@@ -2,7 +2,7 @@ data "azurerm_client_config" "current" {
 }
 
 data "azurerm_key_vault_secret" "username" {
-  name = "username"
+  name         = "username"
   key_vault_id = azurerm_key_vault.keyvault.id
 }
 

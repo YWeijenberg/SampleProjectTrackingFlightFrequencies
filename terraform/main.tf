@@ -19,7 +19,7 @@ resource "azurerm_key_vault" "keyvault" {
   resource_group_name      = azurerm_resource_group.TrackingFlightFrequencies.name
   tenant_id                = data.azurerm_client_config.current.tenant_id
   purge_protection_enabled = false
-  sku_name                  = "standard"
+  sku_name                 = "standard"
 }
 
 # Create an access policy for the key vault giving permissions to databricks
@@ -34,18 +34,18 @@ resource "azurerm_key_vault_access_policy" "kv_access_policy" {
 resource "azurerm_key_vault_access_policy" "user_access_policy" {
   key_vault_id       = azurerm_key_vault.keyvault.id
   tenant_id          = data.azurerm_client_config.current.tenant_id
-  object_id          = data.azuread_user.my_user.id  
+  object_id          = data.azuread_user.my_user.id
   secret_permissions = ["Delete", "Get", "List", "Set"]
 }
 
 # Create a databricks module from the databricks folder
 module "databricks_module" {
   source = "./databricks"
-  
+
   # Pass variables to module
-  rg_name = var.rg_name
-  region  = var.region
-  key_vault_id = azurerm_key_vault.keyvault.id
-  vault_uri    = azurerm_key_vault.keyvault.vault_uri
+  rg_name               = var.rg_name
+  region                = var.region
+  key_vault_id          = azurerm_key_vault.keyvault.id
+  vault_uri             = azurerm_key_vault.keyvault.vault_uri
   identity_prinicpal_id = azurerm_user_assigned_identity.databricks_identity.principal_id
 }

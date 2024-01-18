@@ -26,5 +26,5 @@ variable "vault_uri" {
 
 variable "identity_prinicpal_id" {
   description = "The prinicpal id of the user assigned identity"
-  type = string
+  type        = string
 }

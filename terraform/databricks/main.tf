@@ -12,7 +12,7 @@ resource "azurerm_databricks_workspace" "databricksworkspace" {
 
 resource "azurerm_role_assignment" "databricks_identity_role" {
   scope                = azurerm_databricks_workspace.databricksworkspace.id
-  role_definition_name = "Contributor"  # Or any other role as per your requirements
+  role_definition_name = "Contributor" # Or any other role as per your requirements
   principal_id         = var.identity_prinicpal_id
 }
 
