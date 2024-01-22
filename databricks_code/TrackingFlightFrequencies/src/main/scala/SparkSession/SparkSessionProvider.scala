@@ -6,6 +6,7 @@ trait SparkSessionProvider {
   lazy val spark: SparkSession = {
     SparkSession.builder
       .appName("Flight Frequencies")
+      .master("local[*]")
       .getOrCreate()
   }
 }

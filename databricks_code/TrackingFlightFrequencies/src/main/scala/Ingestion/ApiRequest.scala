@@ -1,4 +1,4 @@
-package ingestion
+package Ingestion
 
 import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
 

@@ -1,5 +1,0 @@
-package ingestion
-
-object JsonSchema {
-
-}
