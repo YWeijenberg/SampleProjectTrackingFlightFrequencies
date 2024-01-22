@@ -1,0 +1,5 @@
+package ingestion
+
+object Parser {
+
+}
