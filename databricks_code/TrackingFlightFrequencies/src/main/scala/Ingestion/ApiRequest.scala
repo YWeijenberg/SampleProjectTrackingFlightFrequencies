@@ -3,11 +3,8 @@ package Ingestion
 import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
 
 object ApiRequest {
-  private val secretScope = "keyvault-managed"
-  private val secretKey = "apiKey"
-  private val apiKey = dbutils.secrets.get(secretScope,secretKey)
 
-  def request(url: String): String = {
+  def request(url: String, apiKey: String): String = {
     val r = requests.get(
       url = url,
       params = Map("access_key" -> apiKey)

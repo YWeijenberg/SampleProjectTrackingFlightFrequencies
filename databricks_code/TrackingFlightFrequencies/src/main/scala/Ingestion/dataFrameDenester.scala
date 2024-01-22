@@ -10,7 +10,8 @@ object dataFrameDenester {
       col("pagination.offset"),
       col("pagination.count"),
       col("pagination.total"),
-      explode(col("data")).alias("data"),
+      explode(col("data")).alias("data")
+    ).select(
       col("data.flight_date"),
       col("data.flight_status"),
       col("data.departure.airport").alias("departure_airport"),
