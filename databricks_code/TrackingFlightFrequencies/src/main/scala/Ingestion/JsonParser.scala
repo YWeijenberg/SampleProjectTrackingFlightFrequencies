@@ -9,7 +9,4 @@ object JsonParser extends SparkSessionProvider {
   def parse (s: String): DataFrame = {
     spark.read.schema(jsonSchema).json(Seq(s).toDS)
   }
-  def deNest (df: DataFrame): DataFrame = {
-
-  }
 }
