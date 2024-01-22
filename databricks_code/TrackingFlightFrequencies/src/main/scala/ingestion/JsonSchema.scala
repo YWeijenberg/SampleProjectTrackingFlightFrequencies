@@ -1,5 +1,5 @@
 package ingestion
 
-object Parser {
+object JsonSchema {
 
 }

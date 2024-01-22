@@ -3,6 +3,7 @@ import ingestion.ApiRequest
 
 object Main {
   def main(args: Array[String]): Unit = {
+    val jsonString = ApiRequest.request(url)
 
   }
 }
