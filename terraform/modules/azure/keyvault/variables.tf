@@ -22,3 +22,8 @@ variable "EntraIDUsername" {
   type        = string
   description = "Entra ID username of the user logged into CLI"
 }
+
+variable "stgacc_key" {
+  type = string
+  description = "Access key of storage account"
+}

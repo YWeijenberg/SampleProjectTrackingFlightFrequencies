@@ -12,6 +12,7 @@ module "keyvault_module" {
   region  = azurerm_resource_group.TrackingFlightFrequencies.location
   prefix  = var.prefix
   secrets = var.keyvault_secrets
+  stgacc_key = module.storage_module.sorage_account_key
 
   EntraIDUsername = var.EntraIDUsername
 
@@ -36,7 +37,6 @@ module "databricks_module" {
   vault_uri                        = module.keyvault_module.keyvault_uri
   databricks_identity_principal_id = module.databricks_module.databricks_identity_principal_id
   stgacc_id = module.storage_module.storage_account_id
-  stgacc_key = module.storage_module.sorage_account_key
 
   depends_on = [module.keyvault_module]
 }

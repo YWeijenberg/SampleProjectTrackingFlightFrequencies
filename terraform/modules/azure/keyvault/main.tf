@@ -28,3 +28,9 @@ resource "azurerm_key_vault_secret" "keyvault_secrets" {
 
   depends_on = [azurerm_key_vault_access_policy.user_access_policy]
 }
+
+resource "azurerm_key_vault_secret" "storage_key" {
+  name          = "storageAccountKey"
+  value = var.stgacc_key
+  key_vault_id = azurerm_key_vault.keyvault.id
+}

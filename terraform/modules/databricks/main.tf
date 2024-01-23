@@ -72,9 +72,3 @@ resource "databricks_repo" "repository" {
   url    = data.azurerm_key_vault_secret.urlRepository.value
   branch = "dev"
 }
-
-resource "databricks_secret" "storage_key" {
-  key          = "blob_storage_key"
-  string_value = var.stgacc_key
-  scope        = databricks_secret_scope.kv.name
-}
