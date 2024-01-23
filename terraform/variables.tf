@@ -22,11 +22,11 @@ variable "keyvault_secrets" {
 }
 
 variable "subscriptionId" {
-  type = string
+  type        = string
   description = "The id of the used subscription"
 }
 
 variable "EntraIDUsername" {
-  type = string
+  type        = string
   description = "Entra ID username of the user logged into CLI"
 }

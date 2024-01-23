@@ -15,16 +15,16 @@ resource "azurerm_key_vault_access_policy" "user_access_policy" {
   object_id          = data.azuread_user.my_user.id
   secret_permissions = ["Delete", "Get", "List", "Set"]
 
-  depends_on = [ azurerm_key_vault.keyvault ]
+  depends_on = [azurerm_key_vault.keyvault]
 }
 
 resource "azurerm_key_vault_secret" "keyvault_secrets" {
   for_each = var.secrets
-  
-  name = each.key
+
+  name  = each.key
   value = each.value
 
   key_vault_id = azurerm_key_vault.keyvault.id
 
-  depends_on = [ azurerm_key_vault_access_policy.user_access_policy ]
+  depends_on = [azurerm_key_vault_access_policy.user_access_policy]
 }

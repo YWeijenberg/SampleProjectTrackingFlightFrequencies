@@ -5,16 +5,24 @@ resource "azurerm_resource_group" "TrackingFlightFrequencies" {
 }
 
 module "keyvault_module" {
-  source = "./modules/keyvault"
+  source = "./modules/azure/keyvault"
 
   # Pass variables to module
-  secrets = var.keyvault_secrets
   rg_name = var.rg_name
   region  = var.region
   prefix  = var.prefix
+  secrets = var.keyvault_secrets
+
   EntraIDUsername = var.EntraIDUsername
 
-  depends_on = [ azurerm_resource_group.TrackingFlightFrequencies ]
+  depends_on = [azurerm_resource_group.TrackingFlightFrequencies]
+}
+
+module "storage_module" {
+  source  = "./modules/azure/storage"
+  rg_name = var.rg_name
+  region  = var.region
+  prefix  = var.prefix
 }
 
 # Create a databricks module from the databricks folder
@@ -28,5 +36,5 @@ module "databricks_module" {
   vault_uri                        = module.keyvault_module.keyvault_uri
   databricks_identity_principal_id = module.databricks_module.databricks_identity_principal_id
 
-  depends_on = [ module.keyvault_module ]
+  depends_on = [module.keyvault_module]
 }
