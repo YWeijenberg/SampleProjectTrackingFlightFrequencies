@@ -33,3 +33,8 @@ variable "stgacc_id" {
   type = string 
   description = "Id of the storage account"
 }
+
+variable "stgacc_key" {
+  type = string
+  description = "Access key of storage account"
+}

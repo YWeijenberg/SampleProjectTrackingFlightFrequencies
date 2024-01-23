@@ -45,7 +45,6 @@ resource "databricks_secret_scope" "kv" {
 
 # Create cluster for personal use during project
 resource "databricks_cluster" "personal_cluster" {
-  # policy_id               = data.databricks_cluster_policy.personal.id
   depends_on              = [azurerm_databricks_workspace.databricksworkspace]
   cluster_name            = "personal_cluster"
   spark_version           = data.databricks_spark_version.latest_lts.id
@@ -72,4 +71,10 @@ resource "databricks_git_credential" "git_credentials" {
 resource "databricks_repo" "repository" {
   url    = data.azurerm_key_vault_secret.urlRepository.value
   branch = "dev"
+}
+
+resource "databricks_secret" "storage_key" {
+  key          = "blob_storage_key"
+  string_value = var.stgacc_key
+  scope        = databricks_secret_scope.kv.name
 }
