@@ -6,3 +6,8 @@ resource "azurerm_storage_account" "stgacc" {
   account_replication_type = "LRS"
 }
 
+resource "azurerm_storage_container" "stgcont" {
+  name = "${var.prefix}"
+  storage_account_name = azurerm_storage_account.stgacc.name
+}
+
