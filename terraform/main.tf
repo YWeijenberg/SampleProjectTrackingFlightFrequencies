@@ -37,6 +37,8 @@ module "databricks_module" {
   vault_uri                        = module.keyvault_module.keyvault_uri
   databricks_identity_principal_id = module.databricks_module.databricks_identity_principal_id
   stgacc_id = module.storage_module.storage_account_id
+  stgacc_name = module.storage_module.storage_account_name
+  blob_name = module.storage_module.storage_container_name
 
-  depends_on = [module.keyvault_module]
+  depends_on = [module.keyvault_module, module.storage_module]
 }

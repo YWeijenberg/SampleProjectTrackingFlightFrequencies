@@ -72,3 +72,15 @@ resource "databricks_repo" "repository" {
   url    = data.azurerm_key_vault_secret.urlRepository.value
   branch = "dev"
 }
+
+
+resource "databricks_mount" "blob" {
+  name = "blob"
+  wasb {
+    container_name       = var.blob_name
+    storage_account_name = var.stgacc_name
+    auth_type            = "ACCESS_KEY"
+    token_secret_scope   = databricks_secret_scope.kv.name
+    token_secret_key     = data.azurerm_key_vault_secret.storageAccountKey.name
+  }
+}

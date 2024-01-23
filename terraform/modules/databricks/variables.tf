@@ -34,3 +34,12 @@ variable "stgacc_id" {
   description = "Id of the storage account"
 }
 
+variable "stgacc_name" {
+  type = string 
+  description = "Name of the storage account"
+}
+
+variable "blob_name" {
+  type = string
+  description = "Name of the blob container"
+}
