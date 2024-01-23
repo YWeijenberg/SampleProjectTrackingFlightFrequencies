@@ -9,5 +9,7 @@ resource "azurerm_storage_account" "stgacc" {
 resource "azurerm_storage_container" "stgcont" {
   name = "${var.prefix}"
   storage_account_name = azurerm_storage_account.stgacc.name
+
+  depends_on = [azurerm_storage_account.stgacc]
 }
 
