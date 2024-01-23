@@ -23,13 +23,13 @@ resource "azurerm_key_vault_access_policy" "kv_access_policy" {
   key_vault_id       = var.keyvault_id
   tenant_id          = data.azurerm_client_config.current.tenant_id
   object_id          = var.databricks_identity_principal_id
-  secret_permissions = ["Delete", "Get", "List", "Set"]
+  secret_permissions = ["Delete", "Get", "List", "Set", "Purge"]
 }
 
-# Assign contributor role to azure databricks workspace
-resource "azurerm_role_assignment" "databricks_identity_role" {
-  scope                = azurerm_databricks_workspace.databricksworkspace.id
-  role_definition_name = "Contributor" # Or any other role as per your requirements
+# Step 3: Grant Managed Identity access to the Storage Account
+resource "azurerm_role_assignment" "role_assignment_blob_databricks" {
+  scope                = var.stgacc_id
+  role_definition_name = "Storage Blob Data Contributor" 
   principal_id         = azurerm_user_assigned_identity.databricks_identity.principal_id
 }
 

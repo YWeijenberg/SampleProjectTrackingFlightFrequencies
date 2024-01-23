@@ -28,3 +28,8 @@ variable "databricks_identity_principal_id" {
   type        = string
   description = "Principal ID of the user assigned identity assigned to databricks "
 }
+
+variable "stgacc_id" {
+  type = string 
+  description = "Id of the storage account"
+}

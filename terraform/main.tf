@@ -35,6 +35,7 @@ module "databricks_module" {
   keyvault_id                      = module.keyvault_module.keyvault_id
   vault_uri                        = module.keyvault_module.keyvault_uri
   databricks_identity_principal_id = module.databricks_module.databricks_identity_principal_id
+  stgacc_id = module.storage_module.stgacc_id
 
   depends_on = [module.keyvault_module]
 }
