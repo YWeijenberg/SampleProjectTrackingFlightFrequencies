@@ -14,7 +14,7 @@ variable "user_name" {
   description = "Email of the user that will use the compute instance"
 }
 
-variable "key_vault_id" {
+variable "keyvault_id" {
   description = "The ID of the Azure Key Vault"
   type        = string
 }
@@ -24,12 +24,7 @@ variable "vault_uri" {
   type        = string
 }
 
-variable "identity_prinicpal_id" {
-  description = "The prinicpal id of the user assigned identity"
+variable "databricks_identity_principal_id" {
   type        = string
-}
-
-variable "azurerm_keyvault_id" {
-  description = "The id of the azure keyvault"
-  type        = string
+  description = "Principal ID of the user assigned identity assigned to databricks "
 }
