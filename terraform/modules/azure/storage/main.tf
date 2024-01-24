@@ -8,8 +8,9 @@ resource "azurerm_storage_account" "stgacc" {
 }
 
 resource "azurerm_storage_container" "blob" {
-  name = lower(var.prefix)
-  storage_account_name = azurerm_storage_account.stgacc.name
+  name                  = lower(var.prefix)
+  storage_account_name  = azurerm_storage_account.stgacc.name
+  container_access_type = "private"
 
   depends_on = [azurerm_storage_account.stgacc]
 }

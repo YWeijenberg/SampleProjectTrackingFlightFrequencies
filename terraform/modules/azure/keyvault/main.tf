@@ -30,7 +30,7 @@ resource "azurerm_key_vault_secret" "keyvault_secrets" {
 }
 
 resource "azurerm_key_vault_secret" "storage_key" {
-  name          = "storageAccountKey"
-  value = var.stgacc_key
+  name         = "storageAccountKey"
+  value        = var.stgacc_key
   key_vault_id = azurerm_key_vault.keyvault.id
 }

@@ -24,22 +24,17 @@ variable "vault_uri" {
   type        = string
 }
 
-variable "databricks_identity_principal_id" {
-  type        = string
-  description = "Principal ID of the user assigned identity assigned to databricks "
-}
-
 variable "stgacc_id" {
-  type = string 
+  type        = string
   description = "Id of the storage account"
 }
 
 variable "stgacc_name" {
-  type = string 
+  type        = string
   description = "Name of the storage account"
 }
 
 variable "blob_name" {
-  type = string
+  type        = string
   description = "Name of the blob container"
 }

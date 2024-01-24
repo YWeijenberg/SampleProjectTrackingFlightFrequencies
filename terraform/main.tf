@@ -8,13 +8,23 @@ module "keyvault_module" {
   source = "./modules/azure/keyvault"
 
   # Pass variables to module
-  rg_name = azurerm_resource_group.TrackingFlightFrequencies.name
-  region  = azurerm_resource_group.TrackingFlightFrequencies.location
-  prefix  = var.prefix
-  secrets = var.keyvault_secrets
-  stgacc_key = module.storage_module.sorage_account_key
+  rg_name                          = azurerm_resource_group.TrackingFlightFrequencies.name
+  region                           = azurerm_resource_group.TrackingFlightFrequencies.location
+  prefix                           = var.prefix
+  secrets                          = var.keyvault_secrets
+  stgacc_key                       = module.storage_module.sorage_account_key
 
   EntraIDUsername = var.EntraIDUsername
+
+  depends_on = [azurerm_resource_group.TrackingFlightFrequencies]
+}
+
+module "vnet_module" {
+  source = "./modules/azure/vnet"
+
+  # Pass variables to module
+  rg_name = azurerm_resource_group.TrackingFlightFrequencies.name
+  region  = azurerm_resource_group.TrackingFlightFrequencies.location
 
   depends_on = [azurerm_resource_group.TrackingFlightFrequencies]
 }
@@ -31,14 +41,13 @@ module "databricks_module" {
   source = "./modules/databricks"
 
   # Pass variables to module
-  rg_name                          = azurerm_resource_group.TrackingFlightFrequencies.name
-  region                           = azurerm_resource_group.TrackingFlightFrequencies.location
-  keyvault_id                      = module.keyvault_module.keyvault_id
-  vault_uri                        = module.keyvault_module.keyvault_uri
-  databricks_identity_principal_id = module.databricks_module.databricks_identity_principal_id
-  stgacc_id = module.storage_module.storage_account_id
+  rg_name     = azurerm_resource_group.TrackingFlightFrequencies.name
+  region      = azurerm_resource_group.TrackingFlightFrequencies.location
+  keyvault_id = module.keyvault_module.keyvault_id
+  vault_uri   = module.keyvault_module.keyvault_uri
+  stgacc_id   = module.storage_module.storage_account_id
   stgacc_name = module.storage_module.storage_account_name
-  blob_name = module.storage_module.storage_container_name
+  blob_name   = module.storage_module.storage_container_name
 
   depends_on = [module.keyvault_module, module.storage_module]
 }

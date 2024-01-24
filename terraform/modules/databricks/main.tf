@@ -5,9 +5,9 @@ resource "azurerm_databricks_workspace" "databricksworkspace" {
   location            = var.region
   sku                 = "trial"
 
-  tags = {
-    # Put any tags here
-  }
+  # custom_parameters {
+  #   virtual_network_id = 
+  # }
 }
 
 # Create a user assigned identity for databricks
@@ -22,14 +22,15 @@ resource "azurerm_user_assigned_identity" "databricks_identity" {
 resource "azurerm_key_vault_access_policy" "kv_access_policy" {
   key_vault_id       = var.keyvault_id
   tenant_id          = data.azurerm_client_config.current.tenant_id
-  object_id          = var.databricks_identity_principal_id
+  object_id          = azurerm_user_assigned_identity.databricks_identity.principal_id
   secret_permissions = ["Delete", "Get", "List", "Set", "Purge"]
 }
+
 
 # Step 3: Grant Managed Identity access to the Storage Account
 resource "azurerm_role_assignment" "role_assignment_blob_databricks" {
   scope                = var.stgacc_id
-  role_definition_name = "Storage Blob Data Contributor" 
+  role_definition_name = "Storage Blob Data Contributor"
   principal_id         = azurerm_user_assigned_identity.databricks_identity.principal_id
 }
 
@@ -61,6 +62,7 @@ resource "databricks_cluster" "personal_cluster" {
   }
 }
 
+# Create a git credentials resource for connecting to a databricks repository
 resource "databricks_git_credential" "git_credentials" {
   git_provider          = "gitHub"
   git_username          = data.azurerm_key_vault_secret.gitUserName.value
@@ -71,16 +73,4 @@ resource "databricks_git_credential" "git_credentials" {
 resource "databricks_repo" "repository" {
   url    = data.azurerm_key_vault_secret.urlRepository.value
   branch = "dev"
-}
-
-
-resource "databricks_mount" "blob" {
-  name = "blob"
-  wasb {
-    container_name       = var.blob_name
-    storage_account_name = var.stgacc_name
-    auth_type            = "ACCESS_KEY"
-    token_secret_scope   = databricks_secret_scope.kv.name
-    token_secret_key     = data.azurerm_key_vault_secret.storageAccountKey.name
-  }
 }

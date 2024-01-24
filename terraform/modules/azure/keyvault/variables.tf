@@ -24,6 +24,6 @@ variable "EntraIDUsername" {
 }
 
 variable "stgacc_key" {
-  type = string
+  type        = string
   description = "Access key of storage account"
 }
