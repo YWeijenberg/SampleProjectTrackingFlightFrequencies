@@ -62,7 +62,7 @@ module "db_access_control" {
 module "db_compute" {
   source = "./modules/databricks/compute"
 
-  depends_on = [azurerm_databricks_workspace.databricksworkspace]
+  depends_on = [azurerm_databricks_workspace.databricksworkspace, module.db_access_control]
 }
 module "db_secret_scope" {
   source = "./modules/databricks/secret_scope"

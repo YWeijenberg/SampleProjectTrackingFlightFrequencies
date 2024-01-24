@@ -13,8 +13,7 @@ resource "azurerm_key_vault_access_policy" "user_access_policy" {
   key_vault_id       = azurerm_key_vault.keyvault.id
   tenant_id          = data.azurerm_client_config.current.tenant_id
   object_id          = data.azuread_user.my_user.id
-  secret_permissions = ["Delete", "Get", "List", "Set"]
-
+  secret_permissions = ["Delete", "Get", "List", "Set", "Purge"]
 }
 
 resource "azurerm_key_vault_secret" "keyvault_secrets" {
