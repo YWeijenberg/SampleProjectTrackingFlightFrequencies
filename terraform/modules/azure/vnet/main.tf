@@ -12,3 +12,4 @@ resource "azurerm_subnet" "subnet1" {
   address_prefixes     = ["10.2.0.0/24"]
   #   service_endpoints    = ["Microsoft.KeyVault", "Microsoft.Storage"]
 }
+

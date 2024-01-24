@@ -11,10 +11,7 @@ terraform {
 
 
 provider "databricks" {
-  azure_workspace_resource_id = module.databricks_module.databrickworkspace_id
-
-  # ARM_USE_MSI environment variable is recommended
-  # azure_use_msi = true
+  azure_workspace_resource_id = azurerm_databricks_workspace.databricksworkspace.id
 }
 
 # Configure the Microsoft Azure Provider

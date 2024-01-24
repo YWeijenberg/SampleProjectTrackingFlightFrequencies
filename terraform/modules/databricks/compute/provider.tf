@@ -3,8 +3,5 @@ terraform {
     databricks = {
       source = "databricks/databricks"
     }
-    azurerm = {
-      source = "hashicorp/azurerm"
-    }
   }
 }
