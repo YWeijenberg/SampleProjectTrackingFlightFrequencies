@@ -42,11 +42,11 @@ resource "azurerm_databricks_workspace" "databricksworkspace" {
   location            = var.region
   sku                 = "trial"
 
-  # custom_parameters {
-  #   virtual_network_id = module.vnet_module.vnet_id
-  #   private_subnet_name = "private-subnet"
-  #   public_subnet_name = "public-subnet"
-  # }
+  custom_parameters {
+    virtual_network_id = module.vnet_module.vnet_id
+    private_subnet_name = "private-subnet"
+    public_subnet_name = "public-subnet"
+  }
 }
 
 module "db_access_control" {
