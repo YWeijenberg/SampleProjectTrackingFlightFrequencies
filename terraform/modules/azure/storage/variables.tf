@@ -12,3 +12,13 @@ variable "region" {
   type        = string
   description = "Name of resource group where project will be deployed."
 }
+
+variable "subnet_ids" {
+  type = list(string)
+  description = "Ids of subnets in virtual network"
+}
+
+variable "ip_rules" {
+  type = list(string)
+  description = "List of public IP ranges that can access"
+}

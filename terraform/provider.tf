@@ -16,7 +16,12 @@ provider "databricks" {
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
-  features {}
+  features {
+    key_vault {
+      recover_soft_deleted_key_vaults = false 
+      recover_soft_deleted_secrets = false
+    }
+  }
   skip_provider_registration = true
   subscription_id            = var.subscriptionId
 }

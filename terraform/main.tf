@@ -32,6 +32,8 @@ module "storage_module" {
   rg_name = azurerm_resource_group.TrackingFlightFrequencies.name
   region  = azurerm_resource_group.TrackingFlightFrequencies.location
   prefix  = var.prefix
+  subnet_ids = [module.vnet_module.private_subnet_id,module.vnet_module.public_subnet_id]
+  ip_rules = var.ip_rules
 }
 
 
@@ -67,6 +69,7 @@ resource "azurerm_databricks_workspace" "databricksworkspace" {
 
 #   depends_on = [azurerm_databricks_workspace.databricksworkspace, module.db_access_control]
 # }
+
 # module "db_secret_scope" {
 #   source = "./modules/databricks/secret_scope"
 

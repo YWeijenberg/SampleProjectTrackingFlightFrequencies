@@ -10,6 +10,7 @@ resource "azurerm_subnet" "private-subnet" {
   resource_group_name  = var.rg_name
   virtual_network_name = azurerm_virtual_network.vnet1.name
   address_prefixes     = ["10.179.0.0/18"]
+  service_endpoints = ["Microsoft.KeyVault","Microsoft.Storage"]
   delegation {
     name = "private_delegation_databricks"
     service_delegation {
@@ -23,7 +24,8 @@ resource "azurerm_subnet" "public-subnet" {
   resource_group_name  = var.rg_name
   virtual_network_name = azurerm_virtual_network.vnet1.name
   address_prefixes     = ["10.179.64.0/18"]
-  delegation {
+  service_endpoints = ["Microsoft.KeyVault","Microsoft.Storage"]
+  delegation { 
     name = "public_delegation_databricks"
     service_delegation {
       name = "Microsoft.Databricks/workspaces"

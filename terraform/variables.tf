@@ -28,3 +28,8 @@ variable "EntraIDUsername" {
   type        = string
   description = "Entra ID username of the user logged into CLI"
 }
+
+variable "ip_rules" {
+  type = list(string)
+  description = "Public ip adressess that can access storage account"
+}
