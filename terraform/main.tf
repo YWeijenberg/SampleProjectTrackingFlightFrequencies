@@ -54,25 +54,25 @@ resource "azurerm_databricks_workspace" "databricksworkspace" {
   }
 }
 
-# module "db_access_control" {
-#   source = "./modules/databricks/access_control"
+module "db_access_control" {
+  source = "./modules/databricks/access_control"
 
-#   rg_name = azurerm_resource_group.TrackingFlightFrequencies.name
-#   region = azurerm_resource_group.TrackingFlightFrequencies.location
-#   stgacc_id = module.storage_module.storage_account_id
-#   keyvault_id = module.keyvault_module.keyvault_id
+  rg_name = azurerm_resource_group.TrackingFlightFrequencies.name
+  region = azurerm_resource_group.TrackingFlightFrequencies.location
+  stgacc_id = module.storage_module.storage_account_id
+  keyvault_id = module.keyvault_module.keyvault_id
 
-# }
+}
 
-# module "db_compute" {
-#   source = "./modules/databricks/compute"
+module "db_compute" {
+  source = "./modules/databricks/compute"
 
-#   depends_on = [azurerm_databricks_workspace.databricksworkspace, module.db_access_control]
-# }
+  depends_on = [azurerm_databricks_workspace.databricksworkspace, module.db_access_control]
+}
 
-# module "db_secret_scope" {
-#   source = "./modules/databricks/secret_scope"
+module "db_secret_scope" {
+  source = "./modules/databricks/secret_scope"
 
-#   keyvault_id = module.keyvault_module.keyvault_id
-#   vault_uri   = module.keyvault_module.keyvault_uri
-# }
+  keyvault_id = module.keyvault_module.keyvault_id
+  vault_uri   = module.keyvault_module.keyvault_uri
+}
