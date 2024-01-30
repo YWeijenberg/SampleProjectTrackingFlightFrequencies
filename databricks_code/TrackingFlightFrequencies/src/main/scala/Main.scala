@@ -22,7 +22,7 @@ object Main {
       storageAccountName = "flightfreqstgacc9724",
       containerName = "flightfreq",
       airportIcao = "EHAM",
-      sasToken = "sv=2022-11-02&ss=bfqt&srt=co&sp=rwdlacupiytfx&se=2024-01-30T18:11:36Z&st=2024-01-30T10:11:36Z&sip=86.93.214.113&spr=https&sig=vKyQhTJ7kDFhekzx%2BIxP1J8TSaqnmmAIG3W6eMZPZb0%3D",
+      sasToken = sasToken,
       dataFrame = flattenedDf
       )
   }
