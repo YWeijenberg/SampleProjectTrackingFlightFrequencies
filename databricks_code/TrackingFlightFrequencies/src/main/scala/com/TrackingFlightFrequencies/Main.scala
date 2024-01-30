@@ -1,8 +1,8 @@
+package com.TrackingFlightFrequencies
+
+import com.TrackingFlightFrequencies.DataArchiving.DataFrameArchiver
+import com.TrackingFlightFrequencies.Ingestion.{ApiRequest, JsonParser, dataFrameDenester}
 import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
-import Ingestion.{ApiRequest,JsonParser}
-//import SampleData.SampleData
-import Ingestion.dataFrameDenester
-import DataArchiving.DataFrameArchiver
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -16,7 +16,7 @@ object Main {
     val sasToken = dbutils.secrets.get(secretScope, secretSas)
     val jsonString = ApiRequest.request(url = url, apiKey = apiKey)
     val storageAccountname = dbutils.secrets.get(secretScope, storageAccountnameKey)
-    val containerName = dbutils.secrets.get(secretScope,containerNameKey)
+    val containerName = dbutils.secrets.get(secretScope, containerNameKey)
 
     val raw_df = JsonParser.parse(jsonString)
     val flattenedDf = dataFrameDenester.flattenDataFrame(raw_df)
@@ -26,6 +26,6 @@ object Main {
       airportIcao = "EHAM",
       sasToken = sasToken,
       dataFrame = flattenedDf
-      )
+    )
   }
 }

@@ -1,4 +1,4 @@
-package Ingestion
+package com.TrackingFlightFrequencies.Ingestion
 
 import org.apache.spark.sql.types._
 

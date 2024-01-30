@@ -1,4 +1,4 @@
-package SparkSession
+package com.TrackingFlightFrequencies.SparkSession
 
 import org.apache.spark.sql.SparkSession
 

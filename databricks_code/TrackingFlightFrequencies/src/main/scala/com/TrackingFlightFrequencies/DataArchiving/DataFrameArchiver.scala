@@ -1,6 +1,6 @@
-package DataArchiving
+package com.TrackingFlightFrequencies.DataArchiving
 
-import SparkSession.SparkSessionProvider
+import com.TrackingFlightFrequencies.SparkSession.SparkSessionProvider
 import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
 import org.apache.spark.sql.DataFrame
 

@@ -1,4 +1,4 @@
-package Ingestion
+package com.TrackingFlightFrequencies.Ingestion
 
 import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
 

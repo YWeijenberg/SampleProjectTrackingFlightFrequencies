@@ -1,4 +1,4 @@
-package Ingestion
+package com.TrackingFlightFrequencies.Ingestion
 
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions.{col, explode}

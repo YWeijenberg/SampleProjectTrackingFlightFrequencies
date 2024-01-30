@@ -68,6 +68,12 @@ module "db_access_control" {
 
 }
 
+# module "db_repo" {
+#   source = "./modules/databricks/repo"
+
+#   keyvault_id = module.keyvault_module.keyvault_id
+# }
+
 module "db_compute" {
   source = "./modules/databricks/compute"
 
