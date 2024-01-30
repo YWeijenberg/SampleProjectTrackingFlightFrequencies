@@ -10,17 +10,19 @@ object Main {
     val secretScope = "keyvault-managed"
     val secretKey = "apiKey"
     val secretSas = "storageSas"
+    val storageAccountnameKey = "storageAccountName"
+    val containerNameKey = "containerName"
     val apiKey = dbutils.secrets.get(secretScope, secretKey)
     val sasToken = dbutils.secrets.get(secretScope, secretSas)
     val jsonString = ApiRequest.request(url = url, apiKey = apiKey)
-    val storageAccountname = dbutils.secrets.get(secretScope, storageAccountname)
-    val containerName = dbutils.secrets.get(secretScope,containerName)
+    val storageAccountname = dbutils.secrets.get(secretScope, storageAccountnameKey)
+    val containerName = dbutils.secrets.get(secretScope,containerNameKey)
 
     val raw_df = JsonParser.parse(jsonString)
     val flattenedDf = dataFrameDenester.flattenDataFrame(raw_df)
     DataFrameArchiver.writeDataFrameToBlob(
-      storageAccountName = "flightfreqstgacc9724",
-      containerName = "flightfreq",
+      storageAccountName = storageAccountname,
+      containerName = containerName,
       airportIcao = "EHAM",
       sasToken = sasToken,
       dataFrame = flattenedDf
