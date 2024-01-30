@@ -12,7 +12,9 @@ module "keyvault_module" {
   region                           = azurerm_resource_group.TrackingFlightFrequencies.location
   prefix                           = var.prefix
   secrets                          = var.keyvault_secrets
-  stgacc_key                       = module.storage_module.sorage_account_key
+  storage_sas_token = module.storage_module.storage_sas_token
+  stgacc_name = module.storage_module.storage_account_name
+  container_name = module.storage_module.storage_container_name
 
   EntraIDUsername = var.EntraIDUsername
 
@@ -34,6 +36,8 @@ module "storage_module" {
   prefix  = var.prefix
   subnet_ids = [module.vnet_module.private_subnet_id,module.vnet_module.public_subnet_id]
   ip_rules = var.ip_rules
+  storage_sas_start = "2024-01-25T12:00:00Z"
+  storage_sas_end = "2024-03-01T14:00:00Z"
 }
 
 

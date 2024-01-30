@@ -23,14 +23,22 @@ resource "azurerm_key_vault_secret" "keyvault_secrets" {
   value = each.value
 
   key_vault_id = azurerm_key_vault.keyvault.id
-
-  depends_on = [azurerm_key_vault_access_policy.user_access_policy]
 }
 
-resource "azurerm_key_vault_secret" "storage_key" {
-  name         = "storageAccountKey"
-  value        = var.stgacc_key
+resource "azurerm_key_vault_secret" "storage_sas_secret" {
+  name = "storageSas"
+  value = var.storage_sas_token
   key_vault_id = azurerm_key_vault.keyvault.id
+}
 
-  depends_on = [azurerm_key_vault_access_policy.user_access_policy]
+resource "azurerm_key_vault_secret" "storage_account_name" {
+  name = "storageAccountName"
+  value = var.stgacc_name
+  key_vault_id = azurerm_key_vault.keyvault.id
+}
+
+resource "azurerm_key_vault_secret" "container_name" {
+  name = "containerName"
+  value = var.container_name
+  key_vault_id = azurerm_key_vault.keyvault.id
 }

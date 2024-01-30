@@ -18,8 +18,6 @@ provider "databricks" {
 provider "azurerm" {
   features {
     key_vault {
-      recover_soft_deleted_key_vaults = false 
-      recover_soft_deleted_secrets = false
     }
   }
   skip_provider_registration = true

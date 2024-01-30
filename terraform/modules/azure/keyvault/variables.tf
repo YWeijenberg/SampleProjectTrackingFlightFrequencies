@@ -23,7 +23,17 @@ variable "EntraIDUsername" {
   description = "Entra ID username of the user logged into CLI"
 }
 
-variable "stgacc_key" {
+variable "stgacc_name" {
   type        = string
-  description = "Access key of storage account"
+  description = "Name of storage account"
+}
+
+variable "storage_sas_token" {
+  type = string
+  description = "Access sas token of storage account"
+}
+
+variable "container_name" {
+  type = string
+  description = "Name of the container used for blob storage"
 }
