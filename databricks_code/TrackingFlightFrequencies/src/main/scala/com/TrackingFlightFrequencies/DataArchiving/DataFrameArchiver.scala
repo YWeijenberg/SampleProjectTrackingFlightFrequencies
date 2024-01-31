@@ -1,7 +1,6 @@
 package com.TrackingFlightFrequencies.DataArchiving
 
 import com.TrackingFlightFrequencies.SparkSession.SparkSessionProvider
-import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
 import org.apache.spark.sql.DataFrame
 
 object DataFrameArchiver extends SparkSessionProvider {

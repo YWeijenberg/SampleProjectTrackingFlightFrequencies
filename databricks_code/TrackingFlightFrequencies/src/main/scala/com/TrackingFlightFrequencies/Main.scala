@@ -1,7 +1,7 @@
 package com.TrackingFlightFrequencies
 
 import com.TrackingFlightFrequencies.DataArchiving.DataFrameArchiver
-import com.TrackingFlightFrequencies.Ingestion.{ApiRequest, JsonParser, dataFrameDenester}
+import com.TrackingFlightFrequencies.Ingestion.{ApiRequest, JsonParser, DataFrameDenester}
 import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
 
 object Main {
@@ -19,7 +19,7 @@ object Main {
     val containerName = dbutils.secrets.get(secretScope, containerNameKey)
 
     val raw_df = JsonParser.parse(jsonString)
-    val flattenedDf = dataFrameDenester.flattenDataFrame(raw_df)
+    val flattenedDf = DataFrameDenester.flattenDataFrame(raw_df)
     DataFrameArchiver.writeDataFrameToBlob(
       storageAccountName = storageAccountname,
       containerName = containerName,

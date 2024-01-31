@@ -29,11 +29,11 @@ variable "stgacc_name" {
 }
 
 variable "storage_sas_token" {
-  type = string
+  type        = string
   description = "Access sas token of storage account"
 }
 
 variable "container_name" {
-  type = string
+  type        = string
   description = "Name of the container used for blob storage"
 }

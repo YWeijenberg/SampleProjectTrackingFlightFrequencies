@@ -14,7 +14,6 @@ resource "azurerm_key_vault_access_policy" "kv_access_policy" {
   secret_permissions = ["Delete", "Get", "List", "Set", "Purge"]
 }
 
-
 # Grant Managed Identity access to the Storage Account
 resource "azurerm_role_assignment" "role_assignment_blob_databricks" {
   scope                = var.stgacc_id

@@ -30,6 +30,6 @@ variable "EntraIDUsername" {
 }
 
 variable "ip_rules" {
-  type = list(string)
+  type        = list(string)
   description = "Public ip adressess that can access storage account"
 }

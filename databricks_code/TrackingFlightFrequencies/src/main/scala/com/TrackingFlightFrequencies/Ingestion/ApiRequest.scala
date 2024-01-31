@@ -1,7 +1,5 @@
 package com.TrackingFlightFrequencies.Ingestion
 
-import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
-
 object ApiRequest {
 
   def request(url: String, apiKey: String): String = {

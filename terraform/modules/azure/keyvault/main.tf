@@ -26,19 +26,19 @@ resource "azurerm_key_vault_secret" "keyvault_secrets" {
 }
 
 resource "azurerm_key_vault_secret" "storage_sas_secret" {
-  name = "storageSas"
-  value = var.storage_sas_token
+  name         = "storageSas"
+  value        = var.storage_sas_token
   key_vault_id = azurerm_key_vault.keyvault.id
 }
 
 resource "azurerm_key_vault_secret" "storage_account_name" {
-  name = "storageAccountName"
-  value = var.stgacc_name
+  name         = "storageAccountName"
+  value        = var.stgacc_name
   key_vault_id = azurerm_key_vault.keyvault.id
 }
 
 resource "azurerm_key_vault_secret" "container_name" {
-  name = "containerName"
-  value = var.container_name
+  name         = "containerName"
+  value        = var.container_name
   key_vault_id = azurerm_key_vault.keyvault.id
 }

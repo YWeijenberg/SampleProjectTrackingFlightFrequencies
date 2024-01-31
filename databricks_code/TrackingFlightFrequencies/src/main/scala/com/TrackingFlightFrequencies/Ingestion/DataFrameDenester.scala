@@ -3,7 +3,7 @@ package com.TrackingFlightFrequencies.Ingestion
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions.{col, explode}
 
-object dataFrameDenester {
+object DataFrameDenester {
   def flattenDataFrame(df: DataFrame): DataFrame = {
     df.select(
       col("pagination.limit"),

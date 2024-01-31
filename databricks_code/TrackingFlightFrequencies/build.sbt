@@ -1,4 +1,4 @@
-ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / version := "0.0.1-SNAPSHOT"
 
 ThisBuild / scalaVersion := "2.12.18"
 
@@ -13,5 +13,9 @@ lazy val root = (project in file("."))
       "com.databricks" %% "dbutils-api" % "0.0.6"
       // Add other Spark modules as needed
     )
-
 )
+
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", _*) => MergeStrategy.discard
+  case _                        => MergeStrategy.first
+}
