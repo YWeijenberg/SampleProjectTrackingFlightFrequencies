@@ -16,6 +16,7 @@ trait GlobalVars {
 //  val sasToken: String = dbutils.secrets.get(secretScope, secretSas)
 //  val storageAccountname: String = dbutils.secrets.get(secretScope, storageAccountnameKey)
 //  val containerName: String = dbutils.secrets.get(secretScope, containerNameKey)
+  val airportIcao = "EHAM"
 
   val rg_name: String = "TrackingFlightFrequencies"
   val apiKey: String = "a6a3214f08d9f47202428d7ef5fb46be"

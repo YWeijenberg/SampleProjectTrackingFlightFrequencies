@@ -18,7 +18,7 @@ object Main extends GlobalVars with SparkSessionProvider {
 //    DataFrameArchiver.writeDataFrameToBlob(
 //      storageAccountName = storageAccountname,
 //      containerName = containerName,
-//      airportIcao = "EHAM",
+//      airportIcao = airportIcao,
 //      dataFrame = flattenedDf,
 //      rg_name = rg_name
 //    )
