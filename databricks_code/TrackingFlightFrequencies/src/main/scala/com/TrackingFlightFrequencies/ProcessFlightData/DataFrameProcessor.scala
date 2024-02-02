@@ -8,7 +8,7 @@ object DataFrameProcessor extends SparkSessionProvider {
   def dataFrameProcessor(df: DataFrame): DataFrame = {
     val dfFiltered = df.select(
       col("departure_icao"),
-      col("arrival_icao"),
+      col("arrival_iata"),
       col("departure_scheduled"),
       col("departure_actual"),
       col("flight_date"),

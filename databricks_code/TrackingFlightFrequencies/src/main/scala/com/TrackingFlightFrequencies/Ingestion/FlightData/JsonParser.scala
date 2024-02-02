@@ -1,7 +1,7 @@
-package com.TrackingFlightFrequencies.Ingestion
+package com.TrackingFlightFrequencies.Ingestion.FlightData
 
+import com.TrackingFlightFrequencies.Ingestion.FlightData.JsonSchema.jsonSchema
 import com.TrackingFlightFrequencies.SparkSession.SparkSessionProvider
-import com.TrackingFlightFrequencies.Ingestion.JsonSchema.jsonSchema
 import org.apache.spark.sql.DataFrame
 
 object JsonParser extends SparkSessionProvider {

@@ -21,6 +21,6 @@ trait GlobalVars {
   val apiKey: String = "a6a3214f08d9f47202428d7ef5fb46be"
   // Make sure to renew the sasToken in Azure before implementing .jar
   val sasToken: String = "?sv=2022-11-02&ss=bfqt&srt=co&sp=rwdlacupyx&se=2024-02-01T22:35:14Z&st=2024-02-01T14:35:14Z&spr=https&sig=myWR8RnnfIjymB0YVB4PP2OVOtwgGgOCdyiVdGqdqC8%3D"
-  val storageAccountName: String = "flightfreqstgacc9724"
+  val storageAccountname: String = "flightfreqstgacc9724"
   val containerName: String = "flightfreq"
 }

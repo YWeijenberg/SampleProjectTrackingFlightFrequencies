@@ -1,4 +1,4 @@
-package com.TrackingFlightFrequencies.Ingestion
+package com.TrackingFlightFrequencies.Ingestion.FlightData
 
 object ApiRequest {
 
