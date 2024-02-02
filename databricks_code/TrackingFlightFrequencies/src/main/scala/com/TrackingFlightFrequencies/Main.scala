@@ -29,6 +29,9 @@ object Main extends GlobalVars with SparkSessionProvider {
     val flattenedDf = DataFrameDenester.flattenDataFrame(raw_df)
     val processedDf = DataFrameProcessor.dataFrameProcessor(df = flattenedDf, definitionsPath = definitionsPath)
 
-    processedDf.show()
+    processedDf.write
+      .format("delta")
+      .option("mergeSchema","true")
+      .saveAsTable(s"departures_count_${airportIcao}")
   }
 }
