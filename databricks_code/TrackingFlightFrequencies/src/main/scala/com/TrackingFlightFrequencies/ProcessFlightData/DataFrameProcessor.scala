@@ -21,7 +21,7 @@ object DataFrameProcessor extends SparkSessionProvider {
 
     val dfWithNames = dfAggregated
       .join(airportNameIataPairs, dfAggregated("arrival_iata") === airportNameIataPairs("iata_code"))
-      .select(col("iata_code"), col("name"), col("count"))
+      .select(col("iata_code"), col("name"), col("count"), col("flight_date"))
 
     dfWithNames
   }
