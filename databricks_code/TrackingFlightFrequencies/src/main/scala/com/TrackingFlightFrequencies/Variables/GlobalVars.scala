@@ -23,4 +23,5 @@ trait GlobalVars {
   val sasToken: String = "?sv=2022-11-02&ss=bfqt&srt=co&sp=rwdlacupyx&se=2024-02-01T22:35:14Z&st=2024-02-01T14:35:14Z&spr=https&sig=myWR8RnnfIjymB0YVB4PP2OVOtwgGgOCdyiVdGqdqC8%3D"
   val storageAccountname: String = "flightfreqstgacc9724"
   val containerName: String = "flightfreq"
+  val definitionsPath: String = "src/main/scala/com/TrackingFlightFrequencies/data/airport-codes.csv"
 }

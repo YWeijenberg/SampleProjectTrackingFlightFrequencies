@@ -27,7 +27,8 @@ object Main extends GlobalVars with SparkSessionProvider {
 //    val jsonString = sampleData
     val raw_df = JsonParser.parse(jsonString)
     val flattenedDf = DataFrameDenester.flattenDataFrame(raw_df)
-    val processedDf = DataFrameProcessor.dataFrameProcessor(flattenedDf)
+    val processedDf = DataFrameProcessor.dataFrameProcessor(df = flattenedDf, definitionsPath = definitionsPath)
+
     processedDf.show()
   }
 }

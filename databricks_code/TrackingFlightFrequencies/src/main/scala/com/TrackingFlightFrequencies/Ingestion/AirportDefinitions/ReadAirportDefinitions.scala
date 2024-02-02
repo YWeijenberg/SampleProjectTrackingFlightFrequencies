@@ -2,8 +2,9 @@ package com.TrackingFlightFrequencies.Ingestion.AirportDefinitions
 
 import com.TrackingFlightFrequencies.SparkSession.SparkSessionProvider
 import com.TrackingFlightFrequencies.Ingestion.AirportDefinitions.AirportDefinitionsSchema.airportDefinitionSchema
+import org.apache.spark.sql.DataFrame
 object ReadAirportDefinitions extends SparkSessionProvider {
-  def readAirportDefinitions(path: String): Unit = {
+  def airportDefinitions(path: String): DataFrame = {
     val df = spark.read
       .option("header", "true")
       .schema(airportDefinitionSchema)
