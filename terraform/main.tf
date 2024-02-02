@@ -12,12 +12,10 @@ module "keyvault_module" {
   region            = azurerm_resource_group.TrackingFlightFrequencies.location
   prefix            = var.prefix
   secrets           = var.keyvault_secrets
-  storage_sas_token = module.storage_module.storage_sas_token
-  stgacc_name       = module.storage_module.storage_account_name
-  container_name    = module.storage_module.storage_container_name
 
   EntraIDUsername = var.EntraIDUsername
 
+  # depends_on = [module.storage_module]
 }
 
 module "vnet_module" {
@@ -36,8 +34,6 @@ module "storage_module" {
   prefix            = var.prefix
   subnet_ids        = [module.vnet_module.private_subnet_id, module.vnet_module.public_subnet_id]
   ip_rules          = var.ip_rules
-  storage_sas_start = "2024-01-25T12:00:00Z"
-  storage_sas_end   = "2024-03-01T14:00:00Z"
 }
 
 
@@ -56,6 +52,12 @@ resource "azurerm_databricks_workspace" "databricksworkspace" {
     public_subnet_network_security_group_association_id  = module.vnet_module.public_subnet_association_id
     no_public_ip                                         = true
   }
+
+  # depends_on = [module.storage_module]
+}
+
+resource "databricks_directory" "db_root_dir" {
+  path = "/${var.rg_name}"
 }
 
 module "db_access_control" {
@@ -65,7 +67,6 @@ module "db_access_control" {
   region      = azurerm_resource_group.TrackingFlightFrequencies.location
   stgacc_id   = module.storage_module.storage_account_id
   keyvault_id = module.keyvault_module.keyvault_id
-
 }
 
 # module "db_repo" {
@@ -85,4 +86,7 @@ module "db_secret_scope" {
 
   keyvault_id = module.keyvault_module.keyvault_id
   vault_uri   = module.keyvault_module.keyvault_uri
+
 }
+
+ 
