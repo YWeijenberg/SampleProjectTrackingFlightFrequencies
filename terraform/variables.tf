@@ -33,3 +33,7 @@ variable "ip_rules" {
   type        = list(string)
   description = "Public ip adressess that can access storage account"
 }
+
+variable "source_airport_definitions" {
+  type = string
+}

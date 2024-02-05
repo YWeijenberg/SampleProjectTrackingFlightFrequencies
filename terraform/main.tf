@@ -34,6 +34,7 @@ module "storage_module" {
   prefix            = var.prefix
   subnet_ids        = [module.vnet_module.private_subnet_id, module.vnet_module.public_subnet_id]
   ip_rules          = var.ip_rules
+  source_airport_definitions = var.source_airport_definitions
 }
 
 
@@ -56,9 +57,9 @@ resource "azurerm_databricks_workspace" "databricksworkspace" {
   # depends_on = [module.storage_module]
 }
 
-resource "databricks_directory" "db_root_dir" {
-  path = "/${var.rg_name}"
-}
+# resource "databricks_directory" "db_root_dir" {
+#   path = "/${var.rg_name}"
+# }
 
 module "db_access_control" {
   source = "./modules/databricks/access_control"
@@ -69,11 +70,11 @@ module "db_access_control" {
   keyvault_id = module.keyvault_module.keyvault_id
 }
 
-# module "db_repo" {
-#   source = "./modules/databricks/repo"
+module "db_repo" {
+  source = "./modules/databricks/repo"
 
-#   keyvault_id = module.keyvault_module.keyvault_id
-# }
+  keyvault_id = module.keyvault_module.keyvault_id
+}
 
 module "db_compute" {
   source = "./modules/databricks/compute"

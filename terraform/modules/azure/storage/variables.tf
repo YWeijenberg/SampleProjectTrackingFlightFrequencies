@@ -22,3 +22,7 @@ variable "ip_rules" {
   type        = list(string)
   description = "List of public IP ranges that can access"
 }
+
+variable "source_airport_definitions" {
+  type = string
+}
