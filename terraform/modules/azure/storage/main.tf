@@ -19,14 +19,14 @@ resource "azurerm_storage_account" "stgacc" {
 # }
 
 resource "azurerm_storage_container" "adls" {
-  name                  = lower(var.prefix)
-   
+  name = lower(var.prefix)
+
   storage_account_name  = azurerm_storage_account.stgacc.name
   container_access_type = "private"
 }
 
-resource "azurerm_storage_blob" "example" {
-  name                   = "airport_definitions.csv"
+resource "azurerm_storage_blob" "airport_definitions_blob" {
+  name                   = "/data/airport_definitions.csv"
   storage_account_name   = azurerm_storage_account.stgacc.name
   storage_container_name = azurerm_storage_container.adls.name
   type                   = "Block"

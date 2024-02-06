@@ -8,10 +8,11 @@ module "keyvault_module" {
   source = "./modules/azure/keyvault"
 
   # Pass variables to module
-  rg_name           = azurerm_resource_group.TrackingFlightFrequencies.name
-  region            = azurerm_resource_group.TrackingFlightFrequencies.location
-  prefix            = var.prefix
-  secrets           = var.keyvault_secrets
+  rg_name                        = azurerm_resource_group.TrackingFlightFrequencies.name
+  region                         = azurerm_resource_group.TrackingFlightFrequencies.location
+  prefix                         = var.prefix
+  secrets                        = var.keyvault_secrets
+  airport_definitions_stgacc_url = module.storage_module.airport_definitions_stgacc_url
 
   EntraIDUsername = var.EntraIDUsername
 
@@ -28,12 +29,12 @@ module "vnet_module" {
 }
 
 module "storage_module" {
-  source            = "./modules/azure/storage"
-  rg_name           = azurerm_resource_group.TrackingFlightFrequencies.name
-  region            = azurerm_resource_group.TrackingFlightFrequencies.location
-  prefix            = var.prefix
-  subnet_ids        = [module.vnet_module.private_subnet_id, module.vnet_module.public_subnet_id]
-  ip_rules          = var.ip_rules
+  source                     = "./modules/azure/storage"
+  rg_name                    = azurerm_resource_group.TrackingFlightFrequencies.name
+  region                     = azurerm_resource_group.TrackingFlightFrequencies.location
+  prefix                     = var.prefix
+  subnet_ids                 = [module.vnet_module.private_subnet_id, module.vnet_module.public_subnet_id]
+  ip_rules                   = var.ip_rules
   source_airport_definitions = var.source_airport_definitions
 }
 
