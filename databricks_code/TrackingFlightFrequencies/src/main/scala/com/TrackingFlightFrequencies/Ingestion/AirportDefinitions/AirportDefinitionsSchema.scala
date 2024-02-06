@@ -18,5 +18,4 @@ object AirportDefinitionsSchema {
     StructField("local_code", StringType, nullable = true),
     StructField("coordinates", StringType, nullable = true)
   ))
-
 }

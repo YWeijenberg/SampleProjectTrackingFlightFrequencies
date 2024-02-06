@@ -14,7 +14,3 @@ data "azurerm_key_vault_secret" "gitPat" {
   key_vault_id = var.keyvault_id
 }
 
-data "azurerm_key_vault_secret" "storageAccountKey" {
-  name         = "storageAccountKey"
-  key_vault_id = var.keyvault_id
-}
