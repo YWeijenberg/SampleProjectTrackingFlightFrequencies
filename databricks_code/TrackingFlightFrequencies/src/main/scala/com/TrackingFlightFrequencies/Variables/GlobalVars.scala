@@ -5,19 +5,14 @@ import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
 trait GlobalVars {
   // Variables for .jar in Databricks
   val url = "http://api.aviationstack.com/v1/flights?dep_icao=EHAM"
-  private val secretRgName = "rgName"
   private val secretScope = "keyvault-managed"
-  private val secretKey = "apiKey"
-  private val secretSas = "storageSas"
-  private val storageAccountnameKey = "storageAccountName"
-  private val containerNameKey = "containerName"
-  val rg_name: String = dbutils.secrets.get(secretScope, secretRgName)
-  val apiKey: String = dbutils.secrets.get(secretScope, secretKey)
-  val sasToken: String = dbutils.secrets.get(secretScope, secretSas)
-  val storageAccountname: String = dbutils.secrets.get(secretScope, storageAccountnameKey)
-  val containerName: String = dbutils.secrets.get(secretScope, containerNameKey)
+  val rg_name: String = dbutils.secrets.get(secretScope, "rgName")
+  val apiKey: String = dbutils.secrets.get(secretScope, "apiKey")
+  val sasToken: String = dbutils.secrets.get(secretScope, "storageSas")
+  val storageAccountname: String = dbutils.secrets.get(secretScope, "storageAccountName")
+  val containerName: String = dbutils.secrets.get(secretScope, "containerName")
   val airportIcao: String = "EHAM"
-  val definitionsPath: String = s"abfss://flightfreq1@flightfreq1stgacc9724.dfs.core.windows.net/data/airport_codes.csv"
+  val definitionsPath: String = dbutils.secrets.get(secretScope, "airportDefUrl")
 
 //  // variables for local dev env
 //  val rg_name: String = "TrackingFlightFrequencies"
