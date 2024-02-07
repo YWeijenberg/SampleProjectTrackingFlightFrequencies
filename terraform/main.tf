@@ -4,14 +4,24 @@ resource "azurerm_resource_group" "TrackingFlightFrequencies" {
   location = var.region
 }
 
+resource "random_id" "random_name_id" {
+  keepers = {
+    random_id = var.random_id
+  }
+
+  byte_length = 2
+}
+
 module "keyvault_module" {
   source = "./modules/azure/keyvault"
 
   # Pass variables to module
-  rg_name                        = azurerm_resource_group.TrackingFlightFrequencies.name
-  region                         = azurerm_resource_group.TrackingFlightFrequencies.location
-  prefix                         = var.prefix
-  secrets                        = var.keyvault_secrets
+  rg_name     = azurerm_resource_group.TrackingFlightFrequencies.name
+  region      = azurerm_resource_group.TrackingFlightFrequencies.location
+  prefix      = var.prefix
+  secrets     = var.keyvault_secrets
+  random_id   = random_id.random_name_id.hex
+  stgacc_name = module.storage_module.stgacc_name
 
   EntraIDUsername = var.EntraIDUsername
 
@@ -35,15 +45,16 @@ module "storage_module" {
   subnet_ids                 = [module.vnet_module.private_subnet_id, module.vnet_module.public_subnet_id]
   ip_rules                   = var.ip_rules
   source_airport_definitions = var.source_airport_definitions
+  random_id                  = random_id.random_name_id.hex
 }
 
 
 # Create a databricks workspace
 resource "azurerm_databricks_workspace" "databricksworkspace" {
-  name                = "${var.prefix}_dbw"
+  name                = "${var.prefix}_dbw${random_id.random_name_id.hex}"
   resource_group_name = var.rg_name
   location            = var.region
-  sku                 = "trial"
+  sku                 = "premium"
 
   custom_parameters {
     virtual_network_id                                   = module.vnet_module.vnet_id
@@ -74,6 +85,18 @@ module "db_repo" {
   source = "./modules/databricks/repo"
 
   keyvault_id = module.keyvault_module.keyvault_id
+}
+
+module "db_queries" {
+  source = "./modules/databricks/queries"
+
+  data_source_id = module.db_compute.data_source_id
+}
+
+module "db_jobs" {
+  source                = "./modules/databricks/jobs"
+  sql_warehouse_id      = module.db_compute.sql_warehouse_id
+  create_table_query_id = module.db_queries.create_table_query_id
 }
 
 module "db_compute" {
