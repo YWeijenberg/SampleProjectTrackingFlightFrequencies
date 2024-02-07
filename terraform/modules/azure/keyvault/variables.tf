@@ -22,3 +22,11 @@ variable "EntraIDUsername" {
   type        = string
   description = "Entra ID username of the user logged into CLI"
 }
+
+variable "random_id" {
+  type = number
+}
+
+variable "stgacc_name" {
+  type = string
+}
