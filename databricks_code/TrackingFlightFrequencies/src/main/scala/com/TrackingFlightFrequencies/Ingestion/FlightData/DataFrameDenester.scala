@@ -12,8 +12,8 @@ object DataFrameDenester {
       col("pagination.total"),
       explode(col("data")).alias("data")
     ).select(
-      col("data.flight_date"),
-      col("data.flight_status"),
+      col("data.flight_date").alias("flight_date"),
+      col("data.flight_status").alias("flight_status"),
       col("data.departure.airport").alias("departure_airport"),
       col("data.departure.timezone").alias("departure_timezone"),
       col("data.departure.iata").alias("departure_iata"),
