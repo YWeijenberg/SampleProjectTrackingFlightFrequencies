@@ -12,7 +12,7 @@ trait GlobalVars {
   val storageAccountname: String = dbutils.secrets.get(secretScope, "storageAccountName")
   val containerName: String = dbutils.secrets.get(secretScope, "containerName")
   val airportIcao: String = "EHAM"
-  val definitionsPath: String = dbutils.secrets.get(secretScope, "airportDefUrl")
+  val definitionsPath: String = s"abfss://${containerName}@${storageAccountname}.dfs.core.windows.net/data/airport_definitions.csv"
 
 //  // variables for local dev env
 //  val rg_name: String = "TrackingFlightFrequencies"
