@@ -26,3 +26,7 @@ variable "ip_rules" {
 variable "source_airport_definitions" {
   type = string
 }
+
+variable "random_id" {
+  type = number
+}
