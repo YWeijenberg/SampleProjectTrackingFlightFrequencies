@@ -22,7 +22,7 @@ object Main extends GlobalVars with SparkSessionProvider {
       dataFrame = flattenedDf,
       rg_name = rg_name
     )
-    val processedDf = DataFrameProcessor.dataFrameProcessor(df=flattenedDf, definitionsPath = definitionsPath)
+    val processedDf = DataFrameProcessor.dataFrameProcessor(df=flattenedDf, defPath = definitionsPath)
 
     // Code for Local Environment Testing
 //    val jsonString = sampleData
@@ -31,7 +31,7 @@ object Main extends GlobalVars with SparkSessionProvider {
 //    val processedDf = DataFrameProcessor.dataFrameProcessor(df = flattenedDf, definitionsPath = definitionsPath)
 
     processedDf.write
-      .format("delta")
+      .mode("append")
       .option("mergeSchema","true")
       .saveAsTable(s"departures_count_${airportIcao}")
   }

@@ -5,17 +5,12 @@ import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerT
 
 object AirportDefinitionsSchema {
   val airportDefinitionSchema = StructType(Array(
-    StructField("ident", StringType, nullable = true),
-    StructField("type", StringType, nullable = true),
-    StructField("name", StringType, nullable = true),
-    StructField("elevation_ft", IntegerType, nullable = true),
-    StructField("continent", StringType, nullable = true),
-    StructField("iso_country", StringType, nullable = true),
-    StructField("iso_region", StringType, nullable = true),
-    StructField("municipality", StringType, nullable = true),
-    StructField("gps_code", StringType, nullable = true),
-    StructField("iata_code", StringType, nullable = true),
-    StructField("local_code", StringType, nullable = true),
-    StructField("coordinates", StringType, nullable = true)
+    StructField("country_code", StringType, nullable = true),
+    StructField("region_name", StringType, nullable = true),
+    StructField("iata", StringType, nullable = true),
+    StructField("icao", StringType, nullable = true),
+    StructField("airport", StringType, nullable = true),
+    StructField("latitude", DoubleType, nullable = true),
+    StructField("longitude", DoubleType, nullable = true)
   ))
 }

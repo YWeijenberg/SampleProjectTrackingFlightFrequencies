@@ -6,22 +6,21 @@ import org.apache.spark.sql.functions.col
 import com.TrackingFlightFrequencies.Ingestion.AirportDefinitions.ReadAirportDefinitions.airportDefinitions
 
 object DataFrameProcessor extends SparkSessionProvider {
-  def dataFrameProcessor(df: DataFrame, definitionsPath: String): DataFrame = {
-    val airportNameIataPairs = airportDefinitions(definitionsPath).select(col("iata_code"), col("name"))
+  def dataFrameProcessor(df: DataFrame, defPath: String): DataFrame = {
+    val airportNameIataPairs = airportDefinitions(defPath).select(col("iata"), col("airport"))
 
     val dfFiltered = df.select(
-      col("departure_icao"),
       col("arrival_iata"),
       col("departure_scheduled"),
       col("departure_actual"),
       col("flight_date"),
       col("flight_number")
     )
-    val dfAggregated = dfFiltered.groupBy("arrival_iata").count()
+    val dfAggregated = dfFiltered.groupBy("arrival_iata","flight_date").count()
 
     val dfWithNames = dfAggregated
-      .join(airportNameIataPairs, dfAggregated("arrival_iata") === airportNameIataPairs("iata_code"))
-      .select(col("iata_code"), col("name"), col("count"), col("flight_date"))
+      .join(airportNameIataPairs, dfAggregated("arrival_iata") === airportNameIataPairs("iata"), "left")
+      .select(col("arrival_iata"), col("count"), col("flight_date"), col("airport"))
 
     dfWithNames
   }
