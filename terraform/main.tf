@@ -12,11 +12,10 @@ module "keyvault_module" {
   region                         = azurerm_resource_group.TrackingFlightFrequencies.location
   prefix                         = var.prefix
   secrets                        = var.keyvault_secrets
-  airport_definitions_stgacc_url = module.storage_module.airport_definitions_stgacc_url
 
   EntraIDUsername = var.EntraIDUsername
 
-  # depends_on = [module.storage_module]
+  depends_on = [module.storage_module]
 }
 
 module "vnet_module" {
@@ -41,7 +40,7 @@ module "storage_module" {
 
 # Create a databricks workspace
 resource "azurerm_databricks_workspace" "databricksworkspace" {
-  name                = "TrackingFlightFrequencies_dbw"
+  name                = "${var.prefix}_dbw"
   resource_group_name = var.rg_name
   location            = var.region
   sku                 = "trial"

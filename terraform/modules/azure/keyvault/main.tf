@@ -14,6 +14,7 @@ resource "azurerm_key_vault_access_policy" "user_access_policy" {
   tenant_id          = data.azurerm_client_config.current.tenant_id
   object_id          = data.azuread_user.my_user.id
   secret_permissions = ["Delete", "Get", "List", "Set", "Purge"]
+  depends_on = [ azurerm_key_vault.keyvault ]
 }
 
 resource "azurerm_key_vault_secret" "keyvault_secrets" {
@@ -24,10 +25,4 @@ resource "azurerm_key_vault_secret" "keyvault_secrets" {
 
   key_vault_id = azurerm_key_vault.keyvault.id
   depends_on   = [azurerm_key_vault_access_policy.user_access_policy]
-}
-
-resource "azurerm_key_vault_secret" "airport_definitions_stgacc_url" {
-  key_vault_id = azurerm_key_vault.keyvault.id
-  value        = var.airport_definitions_stgacc_url
-  name         = "airportDefUrl"
 }

@@ -22,7 +22,3 @@ variable "EntraIDUsername" {
   type        = string
   description = "Entra ID username of the user logged into CLI"
 }
-
-variable "airport_definitions_stgacc_url" {
-  type = string
-}
