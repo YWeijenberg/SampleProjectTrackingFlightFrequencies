@@ -9,6 +9,7 @@ resource "databricks_job" "flightfreq_pipeline" {
       spark_version  = data.databricks_spark_version.latest_lts.id
       node_type_id   = data.databricks_node_type.smallest.id
       runtime_engine = "STANDARD"
+      instance_pool_id = var.instance_pool_id
 
       spark_conf = {
         "spark.databricks.cluster.profile" = "singleNode"
@@ -27,6 +28,24 @@ resource "databricks_job" "flightfreq_pipeline" {
       query {
         query_id = var.create_table_query_id
       }
+    }
+  }
+
+  task { 
+    task_key = "b"
+
+    job_cluster_key = "j"
+
+    depends_on {
+      task_key = "a"
+    }
+
+    library {
+      jar = "dbfs:/flight_frequencies_pipeline.jar"
+    }
+
+    spark_jar_task {
+      main_class_name = "com.TrackingFlightFrequencies.Main"
     }
   }
 }
