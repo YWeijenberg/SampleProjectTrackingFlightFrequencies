@@ -22,6 +22,7 @@ module "keyvault_module" {
   secrets     = var.keyvault_secrets
   random_id   = random_id.random_name_id.hex
   stgacc_name = module.storage_module.stgacc_name
+  sas_token = module.storage_module.sas_token
 
   EntraIDUsername = var.EntraIDUsername
 
@@ -46,6 +47,9 @@ module "storage_module" {
   ip_rules                   = var.ip_rules
   source_airport_definitions = var.source_airport_definitions
   random_id                  = random_id.random_name_id.hex
+  storage_sas_start = "2024-02-07T14:00:01Z"
+  storage_sas_end =  "2024-02-20T15:14:51Z"
+
 }
 
 
@@ -68,9 +72,10 @@ resource "azurerm_databricks_workspace" "databricksworkspace" {
   # depends_on = [module.storage_module]
 }
 
-# resource "databricks_directory" "db_root_dir" {
-#   path = "/${var.rg_name}"
-# }
+resource "databricks_dbfs_file" "jar" {
+  source = "./jar/TrackingFlightFrequencies.jar"
+  path   = "/flight_frequencies_pipeline.jar"
+}
 
 module "db_access_control" {
   source = "./modules/databricks/access_control"
@@ -97,6 +102,7 @@ module "db_jobs" {
   source                = "./modules/databricks/jobs"
   sql_warehouse_id      = module.db_compute.sql_warehouse_id
   create_table_query_id = module.db_queries.create_table_query_id
+  instance_pool_id = module.db_compute.instance_pool_id
 }
 
 module "db_compute" {
