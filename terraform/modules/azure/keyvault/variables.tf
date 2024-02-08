@@ -30,3 +30,7 @@ variable "random_id" {
 variable "stgacc_name" {
   type = string
 }
+
+variable "sas_token" {
+  type = string  
+}

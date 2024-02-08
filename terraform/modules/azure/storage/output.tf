@@ -9,3 +9,7 @@ output "airport_definitions_stgacc_url" {
 output "stgacc_name" {
   value = azurerm_storage_account.stgacc.name
 }
+
+output "sas_token" {
+  value = data.azurerm_storage_account_sas.sas_token.sas
+}

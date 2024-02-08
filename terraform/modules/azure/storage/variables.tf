@@ -30,3 +30,11 @@ variable "source_airport_definitions" {
 variable "random_id" {
   type = number
 }
+
+variable "storage_sas_start" {
+  type = string
+}
+
+variable "storage_sas_end" {
+  type = string
+}
