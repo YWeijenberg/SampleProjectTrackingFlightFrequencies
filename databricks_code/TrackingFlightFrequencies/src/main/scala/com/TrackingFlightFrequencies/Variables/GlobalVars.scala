@@ -6,6 +6,7 @@ trait GlobalVars {
   // Variables for .jar in Databricks
   val url = "http://api.aviationstack.com/v1/flights?dep_icao=EHAM"
   private val secretScope = "keyvault-managed"
+  val apiHost: String = dbutils.secrets.get(secretScope,"apiHost")
   val rg_name: String = dbutils.secrets.get(secretScope, "rgName")
   val apiKey: String = dbutils.secrets.get(secretScope, "apiKey")
   val sasToken: String = dbutils.secrets.get(secretScope, "storageSas")
