@@ -2,21 +2,17 @@ package com.TrackingFlightFrequencies.DataArchiving
 
 import com.TrackingFlightFrequencies.SparkSession.SparkSessionProvider
 import org.apache.spark.sql.DataFrame
+import com.TrackingFlightFrequencies.Variables.GlobalVars
 
-object DataFrameArchiver extends SparkSessionProvider {
+object DataFrameArchiver extends SparkSessionProvider with GlobalVars {
   def writeDataFrameToBlob(dataFrame: DataFrame,
-                           storageAccountName: String,
-                           containerName: String,
-                           airportIcao: String,
-                           dateColumn: String = "flight_date",
-                           rg_name: String) : Unit = {
-    val outputDirectory = s"${rg_name}/archive/${airportIcao}"
+                           isDeparture: Boolean = true) : Unit = {
+
+    val outputDirectory = s"archive/${airportIcao}/${if (isDeparture) "departures" else "arrivals"}"
     val outputPath =
-      s"abfss://${containerName}@${storageAccountName}.dfs.core.windows.net/" +
+      s"abfss://${containerName}@${storageAccountname}.dfs.core.windows.net/" +
         s"${outputDirectory}" // Specify your output directory path
 
-    dataFrame.write.mode("overwrite").partitionBy(dateColumn).parquet(outputPath)
-
+    dataFrame.write.mode("append").parquet(outputPath)
   }
-
 }
