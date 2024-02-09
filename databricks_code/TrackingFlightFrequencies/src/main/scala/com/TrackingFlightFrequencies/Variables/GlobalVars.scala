@@ -4,7 +4,7 @@ import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
 
 trait GlobalVars {
   // Variables for .jar in Databricks
-  val url = "http://api.aviationstack.com/v1/flights?dep_icao=EHAM"
+  val url = "https://aerodatabox.p.rapidapi.com/flights/airports/icao/EHAM/"
   private val secretScope = "keyvault-managed"
   val apiHost: String = dbutils.secrets.get(secretScope,"apiHost")
   val rg_name: String = dbutils.secrets.get(secretScope, "rgName")
