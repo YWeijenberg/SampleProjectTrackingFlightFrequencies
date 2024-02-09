@@ -32,5 +32,5 @@ variable "stgacc_name" {
 }
 
 variable "sas_token" {
-  type = string  
+  type = string
 }

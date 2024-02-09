@@ -5,10 +5,10 @@ resource "databricks_job" "flightfreq_pipeline" {
   job_cluster {
     job_cluster_key = "j"
     new_cluster {
-      num_workers    = 0
-      spark_version  = data.databricks_spark_version.latest_lts.id
-      node_type_id   = data.databricks_node_type.smallest.id
-      runtime_engine = "STANDARD"
+      num_workers      = 0
+      spark_version    = data.databricks_spark_version.latest_lts.id
+      node_type_id     = data.databricks_node_type.smallest.id
+      runtime_engine   = "STANDARD"
       instance_pool_id = var.instance_pool_id
 
       spark_conf = {
@@ -31,7 +31,7 @@ resource "databricks_job" "flightfreq_pipeline" {
     }
   }
 
-  task { 
+  task {
     task_key = "b"
 
     job_cluster_key = "j"

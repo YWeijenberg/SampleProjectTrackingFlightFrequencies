@@ -22,7 +22,7 @@ module "keyvault_module" {
   secrets     = var.keyvault_secrets
   random_id   = random_id.random_name_id.hex
   stgacc_name = module.storage_module.stgacc_name
-  sas_token = module.storage_module.sas_token
+  sas_token   = module.storage_module.sas_token
 
   EntraIDUsername = var.EntraIDUsername
 
@@ -47,8 +47,8 @@ module "storage_module" {
   ip_rules                   = var.ip_rules
   source_airport_definitions = var.source_airport_definitions
   random_id                  = random_id.random_name_id.hex
-  storage_sas_start = "2024-02-07T14:00:01Z"
-  storage_sas_end =  "2024-02-20T15:14:51Z"
+  storage_sas_start          = "2024-02-07T14:00:01Z"
+  storage_sas_end            = "2024-02-20T15:14:51Z"
 
 }
 
@@ -102,7 +102,7 @@ module "db_jobs" {
   source                = "./modules/databricks/jobs"
   sql_warehouse_id      = module.db_compute.sql_warehouse_id
   create_table_query_id = module.db_queries.create_table_query_id
-  instance_pool_id = module.db_compute.instance_pool_id
+  instance_pool_id      = module.db_compute.instance_pool_id
 }
 
 module "db_compute" {
@@ -119,4 +119,9 @@ module "db_secret_scope" {
 
 }
 
- 
+module "db_dashboard" {
+  source                         = "./modules/databricks/dashboard"
+  visualization_dep_by_arr_id    = module.db_queries.visualization_dep_by_arr_id
+  visualization_dep_over_time_id = module.db_queries.visualization_dep_over_time_id
+}
+

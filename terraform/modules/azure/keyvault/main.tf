@@ -36,9 +36,9 @@ resource "azurerm_key_vault_secret" "stgacc_name_secret" {
 }
 
 resource "azurerm_key_vault_secret" "sas_token_secret" {
-  name = "storageSas"
-  value = var.sas_token
+  name         = "storageSas"
+  value        = var.sas_token
   key_vault_id = azurerm_key_vault.keyvault.id
 
-  depends_on = [ azurerm_key_vault_access_policy.user_access_policy ]
+  depends_on = [azurerm_key_vault_access_policy.user_access_policy]
 }

@@ -1,6 +1,6 @@
 data "azurerm_storage_account_sas" "sas_token" {
   connection_string = azurerm_storage_account.stgacc.primary_connection_string
-  https_only = true
+  https_only        = true
 
   start  = var.storage_sas_start
   expiry = var.storage_sas_end
@@ -22,10 +22,10 @@ data "azurerm_storage_account_sas" "sas_token" {
 
   permissions {
     read    = true
-    write   = true  
-    delete  = false 
-    list    = true  
-    add     = false 
+    write   = true
+    delete  = false
+    list    = true
+    add     = false
     create  = true
     update  = false
     process = false
