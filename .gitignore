@@ -3,3 +3,7 @@
 
 # Visual Studio Code files
 .vscode/
+
+# Ignore .jar archive
+terraform/jar/archive/
+
