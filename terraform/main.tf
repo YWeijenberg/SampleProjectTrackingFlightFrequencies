@@ -77,6 +77,11 @@ resource "databricks_dbfs_file" "jar" {
   path   = "/flight_frequencies_pipeline.jar"
 }
 
+resource "databricks_dbfs_file" "sample_data" {
+  source = "./data/sampleData.json"
+  path = "/sampleData.json"
+}
+
 module "db_access_control" {
   source = "./modules/databricks/access_control"
 

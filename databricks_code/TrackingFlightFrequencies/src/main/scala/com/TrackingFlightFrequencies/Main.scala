@@ -6,23 +6,26 @@ import com.TrackingFlightFrequencies.ProcessFlightData.DataFrameProcessor
 import com.TrackingFlightFrequencies.SampleData.SampleData.sampleData
 import com.TrackingFlightFrequencies.Variables.GlobalVars
 import com.TrackingFlightFrequencies.SparkSession.SparkSessionProvider
+import org.apache.spark.sql.DataFrame
 
 object Main extends GlobalVars with SparkSessionProvider {
   def main(args: Array[String]): Unit = {
     // Code for Databricks Environment .jar
-//    val jsonString: String = ApiRequest.request(url = url, apiKey = apiKey, apiHost = apiHost)
-    val jsonString: String = sampleData
+    val jsonString: String = ApiRequest.request(url = url, apiKey = apiKey, apiHost = apiHost)
+//    val raw_df: DataFrame = sampleData
     val raw_df = JsonParser.parse(jsonString)
     val flatDepartures = DataFrameDenester.flattenDepartures(raw_df)
     val flatArrivals = DataFrameDenester.flattenArrivals(raw_df)
     DataFrameArchiver.writeDataFrameToBlob(
-      storageAccountName = storageAccountname,
-      containerName = containerName,
-      airportIcao = airportIcao,
-      dataFrame = flattenedDf,
-      rg_name = rg_name
+      dataFrame = flatDepartures,
     )
-    val processedDf = DataFrameProcessor.dataFrameProcessor(df=flattenedDf, defPath = definitionsPath)
+    DataFrameArchiver.writeDataFrameToBlob(
+      dataFrame = flatArrivals,
+      isDeparture = false
+    )
+
+    val processedDepartures = DataFrameProcessor.dataFrameProcessor(df=flatDepartures, defPath = definitionsPath)
+    val processedArrivals = DataFrameProcessor.dataFrameProcessor(df=flatArrivals, isDeparture = false, defPath = definitionsPath)
 
     // Code for Local Environment Testing
 //    val jsonString = sampleData
@@ -30,9 +33,13 @@ object Main extends GlobalVars with SparkSessionProvider {
 //    val flattenedDf = DataFrameDenester.flattenDataFrame(raw_df)
 //    val processedDf = DataFrameProcessor.dataFrameProcessor(df = flattenedDf, definitionsPath = definitionsPath)
 
-    processedDf.write
+    processedDepartures.write
       .mode("append")
-      .option("mergeSchema","true")
-      .saveAsTable(s"departures_count_${airportIcao}")
+      .option("mergeSchema", "true")
+      .saveAsTable(s"${airportIcao}_departures_count")
+    processedArrivals.write
+      .mode("append")
+      .option("mergeSchema", "true")
+      .saveAsTable(s"${airportIcao}_arrival_count")
   }
 }
