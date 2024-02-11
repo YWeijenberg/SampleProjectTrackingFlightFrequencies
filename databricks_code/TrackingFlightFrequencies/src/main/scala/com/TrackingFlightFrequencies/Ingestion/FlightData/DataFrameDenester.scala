@@ -54,7 +54,7 @@ object DataFrameDenester {
   def flattenArrivals(df: DataFrame): DataFrame = {
     val flattenedDf = df
       .select(
-        explode(col("arrivals").as("arrivals"))
+        explode(col("arrivals")).as("arrivals")
       ).select(
         col("arrivals.movement.airport.icao").as("movement_airport_icao"),
         col("arrivals.movement.airport.iata").as("movement_airport_iata"),
