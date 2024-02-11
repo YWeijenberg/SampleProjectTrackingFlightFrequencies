@@ -40,6 +40,6 @@ object Main extends GlobalVars with SparkSessionProvider {
     processedArrivals.write
       .mode("append")
       .option("mergeSchema", "true")
-      .saveAsTable(s"${airportIcao}_arrival_count")
+      .saveAsTable(s"${airportIcao}_arrivals_count")
   }
 }
