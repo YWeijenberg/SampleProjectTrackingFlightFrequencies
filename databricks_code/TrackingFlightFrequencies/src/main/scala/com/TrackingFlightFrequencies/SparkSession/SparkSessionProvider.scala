@@ -1,7 +1,6 @@
 package com.TrackingFlightFrequencies.SparkSession
 
 import com.TrackingFlightFrequencies.Variables.GlobalVars
-import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 
 trait SparkSessionProvider extends GlobalVars {

@@ -7,7 +7,6 @@ trait GlobalVars {
   val url = "https://aerodatabox.p.rapidapi.com/flights/airports/icao/EHAM/"
   private val secretScope = "keyvault-managed"
   val apiHost: String = dbutils.secrets.get(secretScope,"apiHost")
-  val rg_name: String = dbutils.secrets.get(secretScope, "rgName")
   val apiKey: String = dbutils.secrets.get(secretScope, "apiKey")
   val sasToken: String = dbutils.secrets.get(secretScope, "storageSas")
   val storageAccountname: String = dbutils.secrets.get(secretScope, "storageAccountName")
