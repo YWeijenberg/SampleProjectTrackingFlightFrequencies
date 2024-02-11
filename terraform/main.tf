@@ -106,8 +106,12 @@ module "db_queries" {
 module "db_jobs" {
   source                = "./modules/databricks/jobs"
   sql_warehouse_id      = module.db_compute.sql_warehouse_id
-  create_table_query_id = module.db_queries.create_table_query_id
+  create_arr_table_query_id = module.db_queries.create_arr_table_query_id
+  create_dep_table_query_id = module.db_queries.create_dep_table_query_id
   instance_pool_id      = module.db_compute.instance_pool_id
+
+  depends_on = [azurerm_databricks_workspace.databricksworkspace, module.db_access_control, module.keyvault_module]
+
 }
 
 module "db_compute" {
@@ -126,7 +130,8 @@ module "db_secret_scope" {
 
 module "db_dashboard" {
   source                         = "./modules/databricks/dashboard"
-  visualization_dep_by_arr_id    = module.db_queries.visualization_dep_by_arr_id
+  visualization_arr_by_dep_id = module.db_queries.visualization_arr_by_dep_id
+  visualization_dep_by_arr_id = module.db_queries.visualization_dep_by_arr_id
   visualization_dep_over_time_id = module.db_queries.visualization_dep_over_time_id
 }
 

@@ -24,7 +24,7 @@ variable "EntraIDUsername" {
 }
 
 variable "random_id" {
-  type = number
+  type = string
 }
 
 variable "stgacc_name" {

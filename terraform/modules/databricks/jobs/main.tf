@@ -7,7 +7,7 @@ resource "databricks_job" "flightfreq_pipeline" {
     new_cluster {
       num_workers      = 0
       spark_version    = data.databricks_spark_version.latest_lts.id
-      node_type_id     = data.databricks_node_type.smallest.id
+      # node_type_id     = data.databricks_node_type.smallest.id
       runtime_engine   = "STANDARD"
       instance_pool_id = var.instance_pool_id
 
@@ -21,12 +21,24 @@ resource "databricks_job" "flightfreq_pipeline" {
     }
   }
   task {
-    task_key = "a"
+    task_key = "a1"
 
     sql_task {
       warehouse_id = var.sql_warehouse_id
       query {
-        query_id = var.create_table_query_id
+        query_id = var.create_arr_table_query_id
+      }
+    }
+  }
+
+  task {
+    task_key = "a2"
+
+    sql_task {
+      warehouse_id = var.sql_warehouse_id
+
+      query {
+        query_id = var.create_dep_table_query_id
       }
     }
   }
@@ -37,7 +49,11 @@ resource "databricks_job" "flightfreq_pipeline" {
     job_cluster_key = "j"
 
     depends_on {
-      task_key = "a"
+      task_key = "a1"
+    }
+    
+    depends_on {
+      task_key = "a2"
     }
 
     library {

@@ -28,7 +28,7 @@ variable "source_airport_definitions" {
 }
 
 variable "random_id" {
-  type = number
+  type = string
 }
 
 variable "storage_sas_start" {
