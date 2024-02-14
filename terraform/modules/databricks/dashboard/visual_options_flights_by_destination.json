@@ -36,7 +36,7 @@
         "visible": true
     },
     "series": {
-        "stacking": null,
+        "stacking": "",
         "error_y": {
             "type": "data",
             "visible": true
@@ -64,7 +64,7 @@
     "showDataLabels": false,
     "columnConfigurationMap": {
         "x": {
-            "column": "airport",
+            "column": "airport_name",
             "id": "column_ef055b131094"
         },
         "y": [
@@ -72,7 +72,11 @@
                 "id": "column_ef055b131080",
                 "column": "count"
             }
-        ]
+        ],
+        "series": {
+            "column": "isCargo",
+            "id": "column_c67231b45251"
+        }
     },
     "isAggregationOn": false
 }

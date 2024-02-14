@@ -30,8 +30,9 @@ resource "databricks_sql_query" "visualization_dep_by_arr" {
   data_source_id = var.data_source_id
   name           = "Query of Departures Count by Arrival Airport"
   query          = <<-EOT
-    SELECT count, airport_name, isCargo FROM departures_count_eham
+    SELECT count, airport_name, isCargo FROM eham_departures_count
     WHERE flight_date = current_date()
+    AND airport_name IS NOT NULL
     ORDER BY count DESC
     EOT
 }
@@ -40,8 +41,9 @@ resource "databricks_sql_query" "visualization_arr_by_dep" {
   data_source_id = var.data_source_id
   name = "Query of Arrivals Count by Departure Airport"
   query = <<-EOT
-    SELECT count, airport_name, isCargo FROM arrivals_count_eham
+    SELECT count, airport_name, isCargo FROM eham_arrivals_count
     WHERE flight_date = current_date()
+    AND airport_name IS NOT NULL
     ORDER BY count DESC
     EOT
 }
