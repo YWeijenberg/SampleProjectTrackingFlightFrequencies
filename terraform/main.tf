@@ -4,6 +4,11 @@ resource "azurerm_resource_group" "TrackingFlightFrequencies" {
   location = var.region
 }
 
+resource "azurerm_resource_group" "state-secure" {
+  name     = "state"
+  location = var.region
+}
+
 resource "random_id" "random_name_id" {
   keepers = {
     random_id = var.random_id
@@ -93,12 +98,6 @@ module "db_access_control" {
   rg_name     = azurerm_resource_group.TrackingFlightFrequencies.name
   region      = azurerm_resource_group.TrackingFlightFrequencies.location
   stgacc_id   = module.storage_module.storage_account_id
-  keyvault_id = module.keyvault_module.keyvault_id
-}
-
-module "db_repo" {
-  source = "./modules/databricks/repo"
-
   keyvault_id = module.keyvault_module.keyvault_id
 }
 
