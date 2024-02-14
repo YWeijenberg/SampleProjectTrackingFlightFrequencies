@@ -1,23 +1,61 @@
 package com.TrackingFlightFrequencies.Ingestion.FlightData
 
-object ApiRequest {
+import java.time.{LocalDateTime, ZoneId, LocalDate}
+import java.time.format.DateTimeFormatter
 
-  def request(url: String,
-              apiKey: String,
-              apiHost: String,
-              fromLocal: String = "2024-02-07T12:00",
-              toLocal: String = "2024-02-07T23:59"): String = {
-    val r = requests.get(
+object ApiRequest {
+  def request(url: String, apiKey: String, apiHost: String): String = {
+    val zoneId = ZoneId.of("Europe/Amsterdam")
+    val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+    val today = LocalDate.now(zoneId)
+
+    // Define start and end times for the two periods
+    val morningStart = LocalDateTime.of(today, java.time.LocalTime.MIDNIGHT)
+    val morningEnd = LocalDateTime.of(today, java.time.LocalTime.NOON.minusSeconds(1))
+    val eveningStart = LocalDateTime.of(today, java.time.LocalTime.NOON)
+    val eveningEnd = LocalDateTime.of(today, java.time.LocalTime.MAX).minusSeconds(1)
+
+    // Format periods to strings
+    val morningStartStr = morningStart.format(dateFormatter)
+    val morningEndStr = morningEnd.format(dateFormatter)
+    val eveningStartStr = eveningStart.format(dateFormatter)
+    val eveningEndStr = eveningEnd.format(dateFormatter)
+
+    // First request for the morning period
+    val morningResponse = requests.get(
       url = url,
       headers = Map(
         "X-RapidAPI-Key" -> apiKey,
         "X-RapidAPI-Host" -> apiHost
       ),
       params = Map(
-        "fromLocal" -> fromLocal,
-        "toLocal" -> toLocal
+        "fromLocal" -> morningStartStr,
+        "toLocal" -> morningEndStr,
+        "withPrivate" -> "false"
       )
     )
-    if (r.statusCode == 200) r.text else s"Error: ${r.statusCode}"
+
+    // Second request for the evening period
+    val eveningResponse = requests.get(
+      url = url,
+      headers = Map(
+        "X-RapidAPI-Key" -> apiKey,
+        "X-RapidAPI-Host" -> apiHost
+      ),
+      params = Map(
+        "fromLocal" -> eveningStartStr,
+        "toLocal" -> eveningEndStr,
+        "withPrivate" -> "false"
+      )
+    )
+
+    // Concatenate responses
+    val combinedResponse = (morningResponse, eveningResponse) match {
+      case (mr, er) if mr.statusCode == 200 && er.statusCode == 200 => mr.text + er.text
+      case (mr, _) if mr.statusCode != 200 => s"Morning Error: ${mr.statusCode}"
+      case (_, er) if er.statusCode != 200 => s"Evening Error: ${er.statusCode}"
+    }
+
+    combinedResponse
   }
 }

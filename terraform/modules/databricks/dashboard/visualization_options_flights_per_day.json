@@ -12,14 +12,14 @@
             "enabled": true
         },
         "title": {
-            "text": null
+            "text": "Airport Name"
         }
     },
     "yAxis": [
         {
             "type": "-",
             "title": {
-                "text": "Airport"
+                "text": null
             }
         },
         {

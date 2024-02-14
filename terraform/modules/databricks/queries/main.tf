@@ -39,8 +39,8 @@ resource "databricks_sql_query" "visualization_dep_by_arr" {
 
 resource "databricks_sql_query" "visualization_arr_by_dep" {
   data_source_id = var.data_source_id
-  name = "Query of Arrivals Count by Departure Airport"
-  query = <<-EOT
+  name           = "Query of Arrivals Count by Departure Airport"
+  query          = <<-EOT
     SELECT count, airport_name, isCargo FROM eham_arrivals_count
     WHERE flight_date = current_date()
     AND airport_name IS NOT NULL
@@ -52,8 +52,19 @@ resource "databricks_sql_query" "visualization_dep_over_time" {
   data_source_id = var.data_source_id
   name           = "Query of Departure Count over Time"
   query          = <<-EOT
-    SELECT flight_date, SUM(count) AS total_flights
-    FROM departures_count_eham
+    SELECT flight_date AS `Date`, SUM(count) AS `Total Departures`
+    FROM eham_departures_count
+    GROUP BY flight_date
+    ORDER BY flight_date DESC
+    EOT
+}
+
+resource "databricks_sql_query" "visualization_arr_over_time" {
+  data_source_id = var.data_source_id
+  name           = "Query of Arrival Count over Time"
+  query          = <<-EOT
+    SELECT flight_date AS `Date`, SUM(count) AS `Total Arrivals`
+    FROM eham_arrivals_count
     GROUP BY flight_date
     ORDER BY flight_date DESC
     EOT

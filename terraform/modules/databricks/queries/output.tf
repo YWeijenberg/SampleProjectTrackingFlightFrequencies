@@ -17,3 +17,7 @@ output "visualization_arr_by_dep_id" {
 output "visualization_dep_over_time_id" {
   value = databricks_sql_query.visualization_dep_over_time.id
 }
+
+output "visualization_arr_over_time_id" {
+  value = databricks_sql_query.visualization_arr_over_time.id
+}

@@ -14,11 +14,19 @@ object DataFrameProcessor extends SparkSessionProvider {
     val dfFiltered = df.select(
       col("movement_airport_iata").as("airport_iata"),
       col(s"${if (isDeparture) "departure" else "arrival"}_isCargo").as("isCargo"),
-      col("movement_scheduledTime_local").cast("date").as("flight_date")
+      col("movement_scheduledTime_local").cast("date").as("flight_date"),
+      col("movement_scheduledTime_local").cast("timestamp").as("flight_time"),
+      col("aircraft_reg").as("aircraft_number")
     )
 
+    // The data contains duplicates for synonyms of the flight number
+    // We delete the duplicates by removing all but one of the flights that have:
+    // - the same aircraft number
+    // - the same flight date and time
+    val dfDropDuplicates = dfFiltered.dropDuplicates("aircraft_number", "flight_date", "flight_time")
+
     // Aggregate and get count
-    val dfAggregated = dfFiltered.groupBy("airport_iata", "isCargo", "flight_date").agg(count("*").alias("count"))
+    val dfAggregated = dfDropDuplicates.groupBy("airport_iata", "isCargo", "flight_date").agg(count("*").alias("count"))
 
     // Correctly apply casting to integer type
     val dfAggregatedCasted = dfAggregated.withColumn("count", dfAggregated("count").cast("int"))
