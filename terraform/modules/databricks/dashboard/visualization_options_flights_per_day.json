@@ -1,0 +1,82 @@
+{
+    "version": 2,
+    "globalSeriesType": "column",
+    "sortX": false,
+    "sortY": false,
+    "legend": {
+        "traceorder": "normal"
+    },
+    "xAxis": {
+        "type": "-",
+        "labels": {
+            "enabled": true
+        },
+        "title": {
+            "text": "Airport Name"
+        }
+    },
+    "yAxis": [
+        {
+            "type": "-",
+            "title": {
+                "text": null
+            }
+        },
+        {
+            "type": "-",
+            "opposite": true,
+            "title": {
+                "text": null
+            }
+        }
+    ],
+    "alignYAxesAtZero": true,
+    "error_y": {
+        "type": "data",
+        "visible": true
+    },
+    "series": {
+        "stacking": "",
+        "error_y": {
+            "type": "data",
+            "visible": true
+        }
+    },
+    "seriesOptions": {
+        "count": {
+            "yAxis": 0,
+            "type": "column"
+        }
+    },
+    "valuesOptions": {},
+    "direction": {
+        "type": "counterclockwise"
+    },
+    "sizemode": "diameter",
+    "coefficient": 1,
+    "numberFormat": "0,0.[00000]",
+    "percentFormat": "0[.]00%",
+    "textFormat": "",
+    "missingValuesAsZero": false,
+    "useAggregationsUi": true,
+    "swappedAxes": true,
+    "dateTimeFormat": "YYYY-MM-DD HH:mm",
+    "showDataLabels": false,
+    "columnConfigurationMap": {
+        "x": {
+            "column": "airport_name",
+            "id": "column_ef055b131094"
+        },
+        "y": [
+            {
+                "id": "column_ef055b131080",
+                "column": "count"
+            }
+        ],
+        "series": {
+            "column": "isCargo",
+            "id": "column_c67231b45251"
+        }
+    },
+    "isAggregationOn": false
+}
