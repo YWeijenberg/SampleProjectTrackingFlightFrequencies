@@ -2,7 +2,7 @@ package com.TrackingFlightFrequencies.ProcessFlightData
 
 import com.TrackingFlightFrequencies.SparkSession.SparkSessionProvider
 import org.apache.spark.sql.DataFrame
-import org.apache.spark.sql.functions.{col, count, to_date}
+import org.apache.spark.sql.functions.{col, count}
 import com.TrackingFlightFrequencies.Ingestion.AirportDefinitions.ReadAirportDefinitions.airportDefinitions
 
 object DataFrameProcessor extends SparkSessionProvider {
