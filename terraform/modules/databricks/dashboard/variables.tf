@@ -13,3 +13,7 @@ variable "visualization_dep_over_time_id" {
 variable "visualization_arr_over_time_id" {
   type = string
 }
+
+variable "visualization_current_date" {
+  type = string
+}

@@ -69,3 +69,11 @@ resource "databricks_sql_query" "visualization_arr_over_time" {
     ORDER BY flight_date DESC
     EOT
 }
+
+resource "databricks_sql_query" "visualization_current_date" {
+  data_source_id = var.data_source_id
+  name           = "Current Date"
+  query          = <<-EOT
+    SELECT current_date()
+    EOT
+}

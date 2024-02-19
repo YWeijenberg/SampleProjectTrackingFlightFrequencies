@@ -87,11 +87,6 @@ resource "databricks_dbfs_file" "jar" {
   path   = "/flight_frequencies_pipeline.jar"
 }
 
-resource "databricks_dbfs_file" "sample_data" {
-  source = "./data/sampleData.json"
-  path   = "/sampleData.json"
-}
-
 module "db_access_control" {
   source = "./modules/databricks/access_control"
 
@@ -138,5 +133,6 @@ module "db_dashboard" {
   visualization_dep_by_arr_id    = module.db_queries.visualization_dep_by_arr_id
   visualization_dep_over_time_id = module.db_queries.visualization_dep_over_time_id
   visualization_arr_over_time_id = module.db_queries.visualization_arr_over_time_id
+  visualization_current_date = module.db_queries.visualization_current_date
 }
 
