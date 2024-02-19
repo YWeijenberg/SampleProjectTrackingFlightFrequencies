@@ -6,3 +6,6 @@
 
 # Ignore .jar archive
 terraform/jar/
+
+# Ignore .ds_store files
+.DS_Store
