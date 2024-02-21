@@ -3,6 +3,7 @@ package com.TrackingFlightFrequencies.Ingestion.FlightData
 import org.apache.spark.sql.types._
 
 object JsonSchema {
+  // Mirror of the json schema from the api request
   val jsonSchema: StructType = StructType(
     Array(
       StructField("departures", ArrayType(StructType(

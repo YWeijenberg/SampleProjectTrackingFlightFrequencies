@@ -9,8 +9,11 @@ object DataFrameProcessor extends SparkSessionProvider {
   def dataFrameProcessor(df: DataFrame,
                          isDeparture: Boolean = true,
                          defPath: String): DataFrame = {
+    // Select relevant columns from the airport definitions csv
     val airportNameIataPairs = airportDefinitions(defPath).select(col("iata"), col("airport"))
 
+    // Select relevant columns from the api data
+    // Note that the selection is adjusted for isDeparture
     val dfFiltered = df.select(
       col("movement_airport_iata").as("airport_iata"),
       col(s"${if (isDeparture) "departure" else "arrival"}_isCargo").as("isCargo"),
@@ -31,6 +34,7 @@ object DataFrameProcessor extends SparkSessionProvider {
     // Correctly apply casting to integer type
     val dfAggregatedCasted = dfAggregated.withColumn("count", dfAggregated("count").cast("int"))
 
+    // Join the aggregated data with the airport definitions and select the columns relevant for the visualizations
     val dfWithNames = dfAggregatedCasted
       .join(airportNameIataPairs, dfAggregated("airport_iata") === airportNameIataPairs("iata"), "left")
       .select(col("airport_iata"),

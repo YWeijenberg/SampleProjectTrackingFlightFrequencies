@@ -5,11 +5,13 @@ import java.time.format.DateTimeFormatter
 
 object ApiRequest {
   def request(url: String, apiKey: String, apiHost: String): String = {
+
+    // Set timezone, date format, and today's date
     val zoneId = ZoneId.of("Europe/Amsterdam")
     val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
     val today = LocalDate.now(zoneId)
 
-    // Define start and end times for the two periods
+    // Define start and end times for the two API requests
     val morningStart = LocalDateTime.of(today, java.time.LocalTime.MIDNIGHT)
     val morningEnd = LocalDateTime.of(today, java.time.LocalTime.NOON.minusSeconds(1))
     val eveningStart = LocalDateTime.of(today, java.time.LocalTime.NOON)
