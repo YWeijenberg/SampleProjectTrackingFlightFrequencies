@@ -4,6 +4,7 @@ import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions.{col, explode}
 
 object DataFrameDenester {
+  // Dataframe Denester for the Departures DataFrame
   def flattenDepartures(df: DataFrame): DataFrame = {
     val flattenedDf = df
       .select(
@@ -51,6 +52,8 @@ object DataFrameDenester {
           )
     flattenedDf
   }
+
+  // Dataframe Denester for the Arrivals DataFrame
   def flattenArrivals(df: DataFrame): DataFrame = {
     val flattenedDf = df
       .select(

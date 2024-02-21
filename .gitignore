@@ -9,3 +9,6 @@ terraform/jar/
 
 # Ignore .ds_store files
 .DS_Store
+
+# Ignore META-INF
+*/META-INF
