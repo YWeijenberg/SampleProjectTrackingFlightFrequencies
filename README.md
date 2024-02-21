@@ -166,3 +166,5 @@ The raw data is stored in an Azure Data Lake Storage (ADLS) Gen2 account, organi
 ### Storage of "Gold" Data
 
 Aggregated data tables are stored in Databricks File System (DBFS), making them easily accessible for querying and visualization within Databricks. This data is stored in the Delta Lake format, which provides ACID transaction support, adding an extra layer of data integrity and reliability to the Parquet storage format.
+
+# Future Changes
