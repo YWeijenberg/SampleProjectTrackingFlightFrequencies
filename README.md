@@ -15,10 +15,10 @@
 # Project Overview
 This project focuses on creating a basic data pipeline on Azure, designed to feed a dashboard with arrival and departure details for a specific airport. <br>
 <br>
-This project serves to concretize my theoretical knowledge on terraform, databricks, azure, and scala. <br>
+This project serves to concretize my theoretical knowledge on terraform, databricks, azure, scala and spark. <br>
 <br>
 
-**Note: In a Real-World Project you would not use spark (databricks) to process the limited amount of data that is ingested from the API but rather use something like pandas which doesn't utilize distributed computing.**
+**Note: In a Real-World Project you would not use spark to process the limited amount of data that is ingested from the API but rather use something like pandas which doesn't utilize distributed computing.**
 
 ## Objectives
 - Display current daily arrival and departure information for Schiphol Airport.
