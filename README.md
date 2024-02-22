@@ -17,6 +17,9 @@ This project focuses on creating a basic data pipeline on Azure, designed to fee
 <br>
 This project serves to concretize my theoretical knowledge on terraform, databricks, azure, and scala. <br>
 <br>
+
+**Note: In a Real-World Project you would not use spark (databricks) to process the limited amount of data that is ingested from the API but rather use something like pandas which doesn't utilize distributed computing.**
+
 ## Objectives
 - Display current daily arrival and departure information for Schiphol Airport.
 - Use an API for data sourcing
