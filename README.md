@@ -22,9 +22,9 @@ This project serves to concretize my theoretical knowledge on terraform, databri
 
 ## Objectives
 - Display current daily arrival and departure information for Schiphol Airport.
-- Use an API for data sourcing
+- Use an API as a data source
 - Run the project on Azure
-- Implement Terraform for IaC.
+- Implement Terraform for IaC
 - Use Azure Databricks for computation and visualization tasks
 
 # Data Source
@@ -32,10 +32,10 @@ To source current and accurate data, an API was used. The criteria of requiring 
 
 ## API Selection
 <b>AviationStack</b>
-Initially, AviationStack was selected for its free tier, capable of providing detailed information on either departures or arrivals at a chosen airport, with a limit of 100 requests per month. However, the limit was quickly reached during testing, indicating a need for a more efficient approach in future development, such as using sample requests during code development before making actual API calls.
+Initially, AviationStack was selected for its free tier, capable of providing detailed information on either departures or arrivals at a chosen airport, with a limit of 100 requests per month. However, the limit was quickly reached during testing, indicating a need for a more efficient approach in future development, such as using a sample request during code development to prevent making an API call everytime the code is run.
 
 <b>AeroDataBox</b>
-Ultimately, AeroDataBox was chosen for the data pipeline due to its affordable minimum tier at $1/month, offering 300 requests sufficient for the project's needs. This API advantageously combines both arrival and departure data in a single request, although it limits data retrieval to a 12-hour span, necessitating two requests per day. This usage pattern allows for approximately 62 requests per airport each month, enabling the inclusion of up to four airports within the limit, in contrast to AviationStack's capacity for just one. This scalability provides potential for expansion. <br>
+Ultimately, AeroDataBox was chosen for the data pipeline due to its affordable minimum tier at $1/month, offering 300 requests which is sufficient for the project's needs. This API advantageously combines both arrival and departure data in a single request, although it limits data retrieval to a 12-hour span, necessitating two requests per day. This usage pattern necessitates approximately 62 requests per airport each month, enabling the inclusion of up to four airports within the API limit of 300 requests. This is in contrast to AviationStack's capacity for just one airport. This scalability provides potential for expansion. <br>
 
 # Architecture
 
@@ -44,7 +44,7 @@ Figure 1: Infrastructure
 
 ## Pipeline Infrastructure
 
-As stated in the project description, this project aims to use terraform, azure, databrick, and scala. The chosen infrastrucure design is shown in Figure 1 and can be summarized as follows: <br>
+As stated in the project description, this project aims to use terraform, azure, databrick, and spark on scala. The chosen infrastrucure design is shown in Figure 1 and can be summarized as follows: <br>
 <br>
 
 1. Scala .jar running as Databricks job ingests data from API
@@ -164,7 +164,7 @@ The scala application that runs on databricks is structured as follows:
 
 ### Storage of Raw Data
 
-The raw data is stored in an Azure Data Lake Storage (ADLS) Gen2 account, organized into separate folders for each airport. Within these folders, data for arrivals and departures are kept in distinct files, facilitating efficient filtering by airport and then by type of flight (arrival/departure). The chosen file format is Parquet, utilizing Snappy compression for its balance of compression chosen for its efficient storage. 
+The raw data is stored in an Azure Data Lake Storage (ADLS) Gen2 account, organized into separate folders for each airport. Within these folders, data for arrivals and departures are kept in distinct files, facilitating efficient filtering by airport and then by type of flight (arrival/departure). The chosen file format is Parquet, chosen for its efficient storage. 
 
 ### Storage of "Gold" Data
 
