@@ -65,7 +65,6 @@ During testing, a Databricks cluster pool was used to reserve Azure computing re
 ### Serverless SQL Warehouse
 
 Serverless is the most expensive SQL warehouse option on databricks if you look at a price per dbu perspective. It is 3.5 times more expensive per dbu than a classic SQL warehouse [(source: Databricks)](https://www.databricks.com/product/pricing/databricks-sql). However, since it is a lot faster at turning on and switching off this has to be taken into account. 
-<b>To be tested:</b>
 
 # Scala Application
 
