@@ -1,9 +1,10 @@
 package com.TrackingFlightFrequencies.SparkSession
 
 import com.TrackingFlightFrequencies.Variables.GlobalVars
+import com.TrackingFlightFrequencies.Variables.GlobalVars.{sasToken, storageAccountname}
 import org.apache.spark.sql.SparkSession
 
-trait SparkSessionProvider extends GlobalVars {
+trait SparkSessionProvider {
 
   var spark: SparkSession = SparkSession.builder.getOrCreate()
 
