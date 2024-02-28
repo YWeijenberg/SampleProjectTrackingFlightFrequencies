@@ -5,9 +5,12 @@ import com.TrackingFlightFrequencies.Ingestion.FlightData.{ApiRequest, DataFrame
 import com.TrackingFlightFrequencies.ProcessFlightData.DataFrameProcessor
 import com.TrackingFlightFrequencies.Variables.GlobalVars
 import com.TrackingFlightFrequencies.SparkSession.SparkSessionProvider
+import com.TrackingFlightFrequencies.Variables.GlobalVars.{airportIcao, apiHost, apiKey, definitionsPath, url}
 
-object Main extends GlobalVars with SparkSessionProvider {
+object Main extends SparkSessionProvider {
   def main(args: Array[String]): Unit = {
+    // Set airportIcao from databricks arguments
+    GlobalVars.airportIcao = Some(args(0))
     // Get string from spi request
     val jsonString: String = ApiRequest.request(url = url, apiKey = apiKey, apiHost = apiHost)
     // Parse json string into a DataFrame

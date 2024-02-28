@@ -3,8 +3,9 @@ package com.TrackingFlightFrequencies.DataArchiving
 import com.TrackingFlightFrequencies.SparkSession.SparkSessionProvider
 import org.apache.spark.sql.DataFrame
 import com.TrackingFlightFrequencies.Variables.GlobalVars
+import com.TrackingFlightFrequencies.Variables.GlobalVars.{airportIcao, containerName, storageAccountname}
 
-object DataFrameArchiver extends SparkSessionProvider with GlobalVars {
+object DataFrameArchiver extends SparkSessionProvider {
   def writeDataFrameToBlob(dataFrame: DataFrame,
                            isDeparture: Boolean = true) : Unit = {
     // Definition of the outpuDirectory
