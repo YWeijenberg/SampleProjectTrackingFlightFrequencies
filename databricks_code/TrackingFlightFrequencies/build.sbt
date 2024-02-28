@@ -10,7 +10,8 @@ lazy val root = (project in file("."))
       "org.apache.spark" %% "spark-sql" % "3.4.1",
       "org.apache.hadoop" % "hadoop-azure" % "3.3.6",
       "com.lihaoyi" %% "requests" % "0.8.0",
-      "com.databricks" %% "dbutils-api" % "0.0.6"
+      "com.databricks" %% "dbutils-api" % "0.0.6",
+      "org.scalatest" %% "scalatest" % "3.2.18" % Test
     )
 )
 

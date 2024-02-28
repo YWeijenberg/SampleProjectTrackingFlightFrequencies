@@ -57,8 +57,8 @@ module "storage_module" {
   ip_rules                   = var.ip_rules
   source_airport_definitions = var.source_airport_definitions
   random_id                  = random_id.random_name_id.hex
-  storage_sas_start          = "2024-02-07T14:00:01Z"
-  storage_sas_end            = "2024-02-20T15:14:51Z"
+  storage_sas_start          = "2024-02-25T14:00:01Z"
+  storage_sas_end            = "2024-03-10T15:14:51Z"
 
 }
 

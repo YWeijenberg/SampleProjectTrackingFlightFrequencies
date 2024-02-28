@@ -5,9 +5,10 @@ import com.TrackingFlightFrequencies.SparkSession.SparkSessionProvider
 import org.apache.spark.sql.DataFrame
 
 object JsonParser extends SparkSessionProvider {
-  import spark.implicits._
+  private val sparkSession = spark
+  import sparkSession.implicits._
   // Parse the api request string to dataframe format using the schema defined in JsonSchema
   def parse (s: String): DataFrame = {
-    spark.read.schema(jsonSchema).json(Seq(s).toDS)
+    sparkSession.read.schema(jsonSchema).json(Seq(s).toDS)
   }
 }

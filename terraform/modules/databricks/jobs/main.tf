@@ -2,7 +2,7 @@ resource "databricks_job" "flightfreq_pipeline" {
   name        = "Flight Frequencies Pipeline"
   description = "Job for running the .jar that executes the pipeline for getting flight frequencies into databricks"
   schedule {
-    quartz_cron_expression = "0 0 00 * * ?"
+    quartz_cron_expression = "0 0 23 * * ?"
     timezone_id            = "Europe/Amsterdam"
   }
   job_cluster {
