@@ -4,24 +4,36 @@ import java.time.{LocalDateTime, ZoneId, LocalDate}
 import java.time.format.DateTimeFormatter
 
 object ApiRequest {
-  def request(url: String, apiKey: String, apiHost: String): String = {
+  def request(url: String, apiKey: String, apiHost: String, dateOption: Option[String]): String = {
 
     // Set timezone, date format, and today's date
     val zoneId = ZoneId.of("Europe/Amsterdam")
     val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
-    val today = LocalDate.now(zoneId)
+
+    val date = dateOption match {
+      case Some(dateStr) => LocalDate.parse(dateStr)
+      case None => LocalDate.now(zoneId)
+    }
 
     // Define start and end times for the two API requests
-    val morningStart = LocalDateTime.of(today, java.time.LocalTime.MIDNIGHT)
-    val morningEnd = LocalDateTime.of(today, java.time.LocalTime.NOON.minusSeconds(1))
-    val eveningStart = LocalDateTime.of(today, java.time.LocalTime.NOON)
-    val eveningEnd = LocalDateTime.of(today, java.time.LocalTime.MAX).minusSeconds(1)
+    val morningStart = LocalDateTime.of(date, java.time.LocalTime.MIDNIGHT)
+    val morningEnd = LocalDateTime.of(date, java.time.LocalTime.NOON.minusSeconds(1))
+    val eveningStart = LocalDateTime.of(date, java.time.LocalTime.NOON)
+    val eveningEnd = LocalDateTime.of(date, java.time.LocalTime.MAX).minusSeconds(1)
 
     // Format periods to strings
     val morningStartStr = morningStart.format(dateFormatter)
     val morningEndStr = morningEnd.format(dateFormatter)
     val eveningStartStr = eveningStart.format(dateFormatter)
     val eveningEndStr = eveningEnd.format(dateFormatter)
+
+    // Logging for checking correct date
+    println(s"Making API request for date: $date")
+    println(s"Strings used for api call:" )
+    println(s"Start morning: $morningStartStr")
+    println(s"End morning: $morningEndStr")
+    println(s"Start evening: $eveningStartStr")
+    println(s"End evening: $eveningEndStr")
 
     // First request for the morning period
     val morningResponse = requests.get(
