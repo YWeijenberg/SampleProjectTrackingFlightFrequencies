@@ -2,7 +2,6 @@ package com.TrackingFlightFrequencies.Ingestion.AirportDefinitions
 
 import org.apache.spark.sql.types.{StructType, StructField, StringType, IntegerType, DoubleType}
 
-
 object AirportDefinitionsSchema {
   val airportDefinitionSchema = StructType(Array(
     StructField("country_code", StringType, nullable = true),

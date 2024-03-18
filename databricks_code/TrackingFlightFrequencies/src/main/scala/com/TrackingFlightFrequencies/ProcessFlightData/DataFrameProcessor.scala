@@ -11,7 +11,6 @@ object DataFrameProcessor extends SparkSessionProvider {
                          defPath: String): DataFrame = {
     // Select relevant columns from the airport definitions csv
     val airportNameIataPairs = airportDefinitions(defPath).select(col("iata"), col("airport"))
-
     // Select relevant columns from the api data
     // Note that the selection is adjusted for isDeparture
     val dfFiltered = df.select(

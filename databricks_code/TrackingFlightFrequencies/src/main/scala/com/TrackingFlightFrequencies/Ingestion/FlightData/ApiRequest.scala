@@ -37,28 +37,24 @@ object ApiRequest {
 
     // First request for the morning period
     val morningResponse = requests.get(
-      url = url,
+      url = s"$url/$morningStartStr/$morningEndStr/",
       headers = Map(
         "X-RapidAPI-Key" -> apiKey,
         "X-RapidAPI-Host" -> apiHost
       ),
       params = Map(
-        "fromLocal" -> morningStartStr,
-        "toLocal" -> morningEndStr,
         "withPrivate" -> "false"
       )
     )
 
     // Second request for the evening period
     val eveningResponse = requests.get(
-      url = url,
+      url = s"$url/$eveningStartStr/$eveningEndStr/",
       headers = Map(
         "X-RapidAPI-Key" -> apiKey,
         "X-RapidAPI-Host" -> apiHost
       ),
       params = Map(
-        "fromLocal" -> eveningStartStr,
-        "toLocal" -> eveningEndStr,
         "withPrivate" -> "false"
       )
     )

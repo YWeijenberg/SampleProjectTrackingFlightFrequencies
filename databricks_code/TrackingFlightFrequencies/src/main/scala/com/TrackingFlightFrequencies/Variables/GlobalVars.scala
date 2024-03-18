@@ -11,6 +11,8 @@ object GlobalVars {
   val storageAccountname: String = dbutils.secrets.get(secretScope, "storageAccountName")
   val containerName: String = dbutils.secrets.get(secretScope, "containerName")
   var airportIcao: Option[String] = None
+  val airport = airportIcao.getOrElse("EHAM")
+  var date: Option[String] = None
   val definitionsPath: String = s"abfss://${containerName}@${storageAccountname}.dfs.core.windows.net/data/airport_definitions.csv"
-  val url = s"https://aerodatabox.p.rapidapi.com/flights/airports/icao/${airportIcao}/"
+  val url = s"https://aerodatabox.p.rapidapi.com/flights/airports/icao/${airport}"
 }
