@@ -25,7 +25,7 @@ This project serves to concretize my theoretical knowledge on terraform, databri
 - Use an API as a data source
 - Run the project on Azure
 - Implement Terraform for IaC
-- Use Azure Databricks for computation and visualization tasks
+- Use Azure Databricks for ETL and visualization tasks
 
 # Data Source
 To source current and accurate data, an API was used. The criteria of requiring only daily updates allowed for the consideration of free APIs offering a limited number of monthly requests.
