@@ -31,11 +31,8 @@ This project serves to concretize my theoretical knowledge on terraform, databri
 To source current and accurate data, an API was used. The criteria of requiring only daily updates allowed for the consideration of free APIs offering a limited number of monthly requests.
 
 ## API Selection
-<b>AviationStack</b>
-Initially, AviationStack was selected for its free tier, capable of providing detailed information on either departures or arrivals at a chosen airport, with a limit of 100 requests per month. However, the limit was quickly reached during testing, indicating a need for a more efficient approach in future development, such as using a sample request during code development to prevent making an API call everytime the code is run.
-
 <b>AeroDataBox</b>
-Ultimately, AeroDataBox was chosen for the data pipeline due to its affordable minimum tier at $1/month, offering 300 requests which is sufficient for the project's needs. This API advantageously combines both arrival and departure data in a single request, although it limits data retrieval to a 12-hour span, necessitating two requests per day. This usage pattern necessitates approximately 62 requests per airport each month, enabling the inclusion of up to four airports within the API limit of 300 requests. This is in contrast to AviationStack's capacity for just one airport. This scalability provides potential for expansion. <br>
+AeroDataBox was chosen for the data pipeline due to its affordable minimum tier at $1/month, offering 300 requests which is sufficient for the project's needs. This API advantageously combines both arrival and departure data in a single request, although it limits data retrieval to a 12-hour span, necessitating two requests per day. This usage pattern necessitates approximately 62 requests per airport each month, enabling the inclusion of up to four airports within the API limit of 300 requests. This scalability provides potential for expansion. <br>
 
 # Architecture
 
